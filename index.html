@@ -45,7 +45,7 @@
       --accent-glow:  rgba(201,168,76,0.32);
     }
 
-    body { background-color: var(--bg); color: var(--text); font-family: "DM Sans", system-ui, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); font-family: "DM Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
 
     /* ── NAV ─────────────────────────────── */
     #main-nav { transition: background-color 0.3s ease, border-color 0.3s ease; }
@@ -151,6 +151,45 @@
     .step-card:hover { transform: translateY(-3px); border-color: rgba(201,168,76,0.3); background-color: rgba(201,168,76,0.03); }
     .step-number { font-family: "Instrument Serif", Georgia, serif; font-style: italic; color: var(--accent); opacity: 0.45; letter-spacing: -0.05em; line-height: 0.85; }
     .step-title  { font-family: "Instrument Serif", Georgia, serif; letter-spacing: -0.02em; line-height: 1.1; }
+
+    /* ── PIPELINE DEMO ──────────────────── */
+    .pipeline-bg {
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(ellipse 70% 55% at 50% 0%, rgba(201,168,76,0.055) 0%, transparent 56%),
+        radial-gradient(ellipse 45% 40% at 95% 80%, rgba(255,255,255,0.02) 0%, transparent 50%);
+    }
+    .scroll-tilt-outer { perspective: 1400px; }
+    .scroll-tilt-card {
+      transform-origin: 50% 0%;
+      transform: rotateX(22deg) scale(0.9);
+      opacity: 0.55;
+      transition: transform 0.07s linear, opacity 0.07s linear;
+      will-change: transform, opacity;
+      box-shadow:
+        0 2px 4px rgba(0,0,0,0.5),
+        0 24px 64px -12px rgba(0,0,0,0.85),
+        0 0 0 1px rgba(255,255,255,0.07),
+        0 48px 96px -24px rgba(201,168,76,0.07);
+    }
+    .pipe-card {
+      background: #141416;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 7px;
+      padding: 10px 12px;
+    }
+    .pipe-card-booked {
+      background: rgba(34,197,94,0.04);
+      border: 1px solid rgba(34,197,94,0.2);
+      border-radius: 7px;
+      padding: 10px 12px;
+    }
+    .pipe-card-qualifying {
+      background: #141416;
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 7px;
+      padding: 10px 12px;
+    }
 
     /* ── PROOF ───────────────────────────── */
     .proof-bg {
@@ -491,6 +530,155 @@
       <p class="mt-9 hidden text-center font-body text-[0.625rem] font-medium uppercase tracking-[0.22em] text-[var(--text-muted)] opacity-35 md:block" aria-hidden="true">
         Meta Ads &nbsp;→&nbsp; Closebot AI &nbsp;→&nbsp; Booked Appointment
       </p>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       PIPELINE DEMO
+  ════════════════════════════════════════ -->
+  <section id="pipeline" class="pipeline-bg relative overflow-hidden" aria-labelledby="pipeline-heading">
+    <div class="section-divider absolute inset-x-0 top-0 h-px" aria-hidden="true"></div>
+
+    <div class="relative z-10 mx-auto w-full max-w-6xl px-5 py-24 sm:px-8 sm:py-32 lg:px-12 lg:py-36">
+
+      <div class="mb-14 sm:mb-16 lg:mb-20">
+        <p class="section-overline font-body mb-7 text-[0.6875rem] font-medium uppercase tracking-[0.18em] sm:mb-8 sm:text-xs">The system in motion</p>
+        <h2 id="pipeline-heading" class="section-heading max-w-2xl text-[2rem] font-normal text-[var(--text)] sm:text-[2.75rem] md:text-[3.25rem] lg:text-[3.75rem]">
+          Your calendar fills<br>while you run jobs.
+        </h2>
+        <p class="mt-6 max-w-xl text-[0.9375rem] leading-[1.7] text-[var(--text-muted)] sm:mt-7 sm:text-lg">
+          Closebot qualifies leads around the clock. By the time you pick up your phone, the appointment is already waiting.
+        </p>
+      </div>
+
+      <div class="scroll-tilt-outer">
+        <div id="scroll-tilt" class="scroll-tilt-card mx-auto max-w-5xl overflow-hidden rounded-xl">
+          <!-- Mock pipeline dashboard -->
+          <div style="background:#0c0c0e;font-family:'DM Sans',system-ui,sans-serif;">
+
+            <!-- Top bar -->
+            <div style="background:#141416;border-bottom:1px solid rgba(255,255,255,0.07);padding:13px 20px;display:flex;align-items:center;justify-content:space-between;">
+              <div style="display:flex;align-items:center;gap:9px;">
+                <span style="width:7px;height:7px;border-radius:50%;background:#22c55e;flex-shrink:0;box-shadow:0 0 8px rgba(34,197,94,0.55);"></span>
+                <span style="font-size:12.5px;font-weight:500;color:#f2f2f3;letter-spacing:0.01em;">Booked Solid Pipeline</span>
+                <span style="font-size:11px;color:rgba(155,155,163,0.55);">· Metro Detroit</span>
+              </div>
+              <span style="font-size:11px;color:rgba(155,155,163,0.5);">Live · Last 24 hrs</span>
+            </div>
+
+            <!-- Column headers -->
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid rgba(255,255,255,0.05);">
+              <div style="padding:10px 16px 9px;">
+                <span style="font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#9b9ba3;">New Leads</span>
+                <span style="margin-left:7px;font-size:10px;background:rgba(201,168,76,0.14);color:#c9a84c;padding:1px 7px;border-radius:20px;font-weight:600;">14</span>
+              </div>
+              <div style="padding:10px 16px 9px;border-left:1px solid rgba(255,255,255,0.05);">
+                <span style="font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#9b9ba3;">Qualifying</span>
+                <span style="margin-left:7px;font-size:10px;background:rgba(201,168,76,0.12);color:#c9a84c;padding:1px 7px;border-radius:20px;font-weight:600;">6</span>
+              </div>
+              <div style="padding:10px 16px 9px;border-left:1px solid rgba(255,255,255,0.05);">
+                <span style="font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#9b9ba3;">Booked</span>
+                <span style="margin-left:7px;font-size:10px;background:rgba(34,197,94,0.12);color:#22c55e;padding:1px 7px;border-radius:20px;font-weight:600;">9</span>
+              </div>
+            </div>
+
+            <!-- Lead cards -->
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:14px;">
+
+              <!-- New Leads -->
+              <div style="display:flex;flex-direction:column;gap:7px;">
+                <div class="pipe-card">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                    <span style="font-size:12.5px;font-weight:500;color:#f2f2f3;">Mike R.</span>
+                    <span style="font-size:10px;color:rgba(155,155,163,0.55);">2m ago</span>
+                  </div>
+                  <span style="font-size:10.5px;color:#9b9ba3;">Epoxy · Detroit, MI</span>
+                </div>
+                <div class="pipe-card">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                    <span style="font-size:12.5px;font-weight:500;color:#f2f2f3;">James T.</span>
+                    <span style="font-size:10px;color:rgba(155,155,163,0.55);">9m ago</span>
+                  </div>
+                  <span style="font-size:10.5px;color:#9b9ba3;">HVAC · Macomb, MI</span>
+                </div>
+                <div class="pipe-card">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                    <span style="font-size:12.5px;font-weight:500;color:#f2f2f3;">Carlos V.</span>
+                    <span style="font-size:10px;color:rgba(155,155,163,0.55);">17m ago</span>
+                  </div>
+                  <span style="font-size:10.5px;color:#9b9ba3;">Roofing · Warren, MI</span>
+                </div>
+                <div class="pipe-card">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                    <span style="font-size:12.5px;font-weight:500;color:#f2f2f3;">Kevin M.</span>
+                    <span style="font-size:10px;color:rgba(155,155,163,0.55);">34m ago</span>
+                  </div>
+                  <span style="font-size:10.5px;color:#9b9ba3;">Plumbing · Dearborn, MI</span>
+                </div>
+              </div>
+
+              <!-- Qualifying -->
+              <div style="display:flex;flex-direction:column;gap:7px;">
+                <div class="pipe-card-qualifying">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                    <span style="font-size:12.5px;font-weight:500;color:#f2f2f3;">Travis B.</span>
+                    <span style="font-size:10px;color:#c9a84c;">Qualifying</span>
+                  </div>
+                  <span style="font-size:10.5px;color:#9b9ba3;">Epoxy · Sterling Hts, MI</span>
+                </div>
+                <div class="pipe-card-qualifying">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                    <span style="font-size:12.5px;font-weight:500;color:#f2f2f3;">Dave K.</span>
+                    <span style="font-size:10px;color:#c9a84c;">Qualifying</span>
+                  </div>
+                  <span style="font-size:10.5px;color:#9b9ba3;">Spray Foam · Troy, MI</span>
+                </div>
+                <div class="pipe-card-qualifying">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                    <span style="font-size:12.5px;font-weight:500;color:#f2f2f3;">Ray S.</span>
+                    <span style="font-size:10px;color:#c9a84c;">Qualifying</span>
+                  </div>
+                  <span style="font-size:10.5px;color:#9b9ba3;">Foundation · Auburn Hills, MI</span>
+                </div>
+              </div>
+
+              <!-- Booked -->
+              <div style="display:flex;flex-direction:column;gap:7px;">
+                <div class="pipe-card-booked">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                    <span style="font-size:12.5px;font-weight:500;color:#f2f2f3;">Scott M.</span>
+                    <span style="font-size:10px;color:#22c55e;">Thu 10am ✓</span>
+                  </div>
+                  <span style="font-size:10.5px;color:#9b9ba3;">Concrete Coatings · Macomb</span>
+                </div>
+                <div class="pipe-card-booked">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                    <span style="font-size:12.5px;font-weight:500;color:#f2f2f3;">Brian H.</span>
+                    <span style="font-size:10px;color:#22c55e;">Today 2pm ✓</span>
+                  </div>
+                  <span style="font-size:10.5px;color:#9b9ba3;">Epoxy Flooring · Detroit</span>
+                </div>
+                <div class="pipe-card-booked">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                    <span style="font-size:12.5px;font-weight:500;color:#f2f2f3;">Mark D.</span>
+                    <span style="font-size:10px;color:#22c55e;">Today 4pm ✓</span>
+                  </div>
+                  <span style="font-size:10.5px;color:#9b9ba3;">HVAC · Grosse Pointe, MI</span>
+                </div>
+                <div class="pipe-card-booked">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                    <span style="font-size:12.5px;font-weight:500;color:#f2f2f3;">Tony R.</span>
+                    <span style="font-size:10px;color:#22c55e;">Fri 9am ✓</span>
+                  </div>
+                  <span style="font-size:10.5px;color:#9b9ba3;">Roofing · Clinton Twp, MI</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -870,6 +1058,22 @@
         toggle.setAttribute('aria-expanded', 'false');
       });
     });
+
+    // Scroll tilt animation
+    (function () {
+      var card = document.getElementById('scroll-tilt');
+      if (!card) return;
+      function tick() {
+        var rect = card.getBoundingClientRect();
+        var vh = window.innerHeight;
+        var progress = Math.max(0, Math.min(1, (vh - rect.top) / (vh * 0.72)));
+        var eased = 1 - Math.pow(1 - progress, 2);
+        card.style.transform = 'rotateX(' + (22 * (1 - eased)).toFixed(2) + 'deg) scale(' + (0.9 + 0.1 * eased).toFixed(3) + ')';
+        card.style.opacity = (0.55 + 0.45 * eased).toFixed(3);
+      }
+      window.addEventListener('scroll', tick, { passive: true });
+      tick();
+    })();
   </script>
 
 </body>
