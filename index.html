@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zhed Consulting — More Booked Appointments for Home Service Contractors</title>
+  <meta name="description" content="The Booked Solid System turns your ad spend into booked appointments on your calendar. Meta Ads, AI lead qualification, and a GHL pipeline built for contractors doing $30K–$500K/mo.">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://zhedconsulting.com/">
+  <meta property="og:title" content="Zhed Consulting — More Booked Appointments for Home Service Contractors">
+  <meta property="og:description" content="The Booked Solid System turns your ad spend into booked appointments on your calendar. Built for home service contractors tired of tire-kicker leads and empty calendars.">
+  <meta property="og:site_name" content="Zhed Consulting">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Zhed Consulting — More Booked Appointments for Home Service Contractors">
+  <meta name="twitter:description" content="The Booked Solid System turns your ad spend into booked appointments on your calendar.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Instrument Serif"', 'Georgia', 'serif'],
+            body:    ['"DM Sans"', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    :root {
+      --bg:           #0c0c0e;
+      --bg-elevated:  #141416;
+      --text:         #f2f2f3;
+      --text-muted:   #9b9ba3;
+      --accent:       #c9a84c;
+      --accent-bright:#dfc06a;
+      --accent-dim:   rgba(201,168,76,0.14);
+      --accent-glow:  rgba(201,168,76,0.32);
+    }
+
+    body { background-color: var(--bg); color: var(--text); font-family: "DM Sans", system-ui, sans-serif; }
+
+    /* ── NAV ─────────────────────────────── */
+    #main-nav { transition: background-color 0.3s ease, border-color 0.3s ease; }
+    #main-nav.nav-scrolled {
+      background-color: rgba(12,12,14,0.93);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* ── SHARED BUTTONS ──────────────────── */
+    .btn-primary {
+      background-color: var(--accent);
+      color: var(--bg);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.4), 0 8px 24px -4px var(--accent-glow), 0 2px 8px -2px rgba(201,168,76,0.2);
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), opacity 0.25s ease, box-shadow 0.35s ease, background-color 0.2s ease;
+    }
+    .btn-primary:hover  { background-color: var(--accent-bright); transform: translateY(-2px); box-shadow: 0 1px 2px rgba(0,0,0,0.4), 0 12px 32px -4px var(--accent-glow), 0 4px 12px -2px rgba(201,168,76,0.35); }
+    .btn-primary:focus-visible { outline: 2px solid var(--accent-bright); outline-offset: 3px; transform: translateY(-2px); }
+    .btn-primary:active { transform: translateY(0) scale(0.98); opacity: 0.92; }
+
+    .btn-secondary {
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.18);
+      background-color: rgba(255,255,255,0.03);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 16px -4px rgba(0,0,0,0.5);
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), opacity 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+    }
+    .btn-secondary:hover  { border-color: rgba(201,168,76,0.4); background-color: rgba(201,168,76,0.06); transform: translateY(-1px); }
+    .btn-secondary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-color: rgba(201,168,76,0.5); }
+    .btn-secondary:active { transform: translateY(0) scale(0.98); opacity: 0.85; }
+
+    /* ── SHARED OVERLINE / HEADING ───────── */
+    .section-overline { color: var(--accent); }
+    .section-overline::before {
+      content: "";
+      display: inline-block;
+      width: 1.75rem; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent));
+      vertical-align: middle;
+      margin-right: 0.75rem;
+      opacity: 0.7;
+    }
+    .section-heading { font-family: "Instrument Serif", Georgia, serif; letter-spacing: -0.03em; line-height: 1.02; }
+    .section-divider  { background: linear-gradient(90deg, transparent, rgba(201,168,76,0.35), transparent); }
+
+    /* ── NOISE ───────────────────────────── */
+    .noise-overlay { opacity: 0.045; mix-blend-mode: overlay; pointer-events: none; }
+
+    /* ── HERO ────────────────────────────── */
+    .hero-bg {
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(ellipse 90% 70% at 50% -5%, var(--accent-dim) 0%, transparent 58%),
+        radial-gradient(ellipse 55% 45% at 95% 45%, rgba(201,168,76,0.08) 0%, transparent 52%),
+        radial-gradient(ellipse 45% 40% at 5% 85%, rgba(255,255,255,0.04) 0%, transparent 48%);
+    }
+    .hero-headline { font-family: "Instrument Serif", Georgia, serif; letter-spacing: -0.03em; line-height: 0.95; }
+    .trust-line { color: var(--accent); }
+    .trust-line::before {
+      content: "";
+      display: inline-block;
+      width: 1.5rem; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent));
+      vertical-align: middle;
+      margin-right: 0.625rem;
+      opacity: 0.7;
+    }
+
+    /* ── PROBLEM ─────────────────────────── */
+    .problem-bg {
+      background-color: var(--bg-elevated);
+      background-image:
+        radial-gradient(ellipse 70% 50% at 0% 0%, rgba(201,168,76,0.06) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 50% at 100% 100%, rgba(255,255,255,0.025) 0%, transparent 55%),
+        radial-gradient(ellipse 90% 40% at 50% 50%, rgba(0,0,0,0.25) 0%, transparent 60%);
+    }
+    .pain-card {
+      position: relative;
+      background-color: rgba(255,255,255,0.022);
+      border: 1px solid rgba(255,255,255,0.075);
+      border-radius: 6px;
+      transition: transform 0.4s cubic-bezier(0.34,1.4,0.64,1), border-color 0.3s ease, background-color 0.3s ease;
+    }
+    .pain-card:hover { transform: translateY(-2px); border-color: rgba(201,168,76,0.38); background-color: rgba(201,168,76,0.03); }
+    .pain-numeral { font-family: "Instrument Serif", Georgia, serif; font-style: italic; color: var(--accent); opacity: 0.6; letter-spacing: -0.05em; line-height: 0.85; }
+    .pain-headline { font-family: "Instrument Serif", Georgia, serif; letter-spacing: -0.02em; line-height: 1.1; }
+    .pain-rule { background: linear-gradient(90deg, var(--accent), transparent); opacity: 0.45; }
+
+    /* ── SYSTEM ──────────────────────────── */
+    .system-bg {
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(ellipse 70% 55% at 50% 0%, rgba(201,168,76,0.06) 0%, transparent 58%),
+        radial-gradient(ellipse 45% 40% at 90% 80%, rgba(201,168,76,0.04) 0%, transparent 50%);
+    }
+    .step-card {
+      background-color: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      transition: transform 0.4s cubic-bezier(0.34,1.4,0.64,1), border-color 0.3s ease, background-color 0.3s ease;
+    }
+    .step-card:hover { transform: translateY(-3px); border-color: rgba(201,168,76,0.3); background-color: rgba(201,168,76,0.03); }
+    .step-number { font-family: "Instrument Serif", Georgia, serif; font-style: italic; color: var(--accent); opacity: 0.45; letter-spacing: -0.05em; line-height: 0.85; }
+    .step-title  { font-family: "Instrument Serif", Georgia, serif; letter-spacing: -0.02em; line-height: 1.1; }
+
+    /* ── PROOF ───────────────────────────── */
+    .proof-bg {
+      background-color: var(--bg-elevated);
+      background-image:
+        radial-gradient(ellipse 60% 50% at 0% 0%, rgba(201,168,76,0.05) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 50% at 100% 100%, rgba(201,168,76,0.04) 0%, transparent 52%);
+    }
+    .case-study-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.09); border-radius: 10px; }
+    .metric-value { font-family: "Instrument Serif", Georgia, serif; letter-spacing: -0.04em; line-height: 1; color: var(--accent); }
+    .testimonial-quote { font-family: "Instrument Serif", Georgia, serif; font-style: italic; letter-spacing: -0.01em; line-height: 1.5; }
+
+    /* ── ORIGIN ──────────────────────────── */
+    .origin-bg {
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(ellipse 55% 50% at 100% 0%, rgba(201,168,76,0.05) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 45% at 0% 100%, rgba(255,255,255,0.03) 0%, transparent 50%);
+    }
+    .origin-pullquote { font-family: "Instrument Serif", Georgia, serif; letter-spacing: -0.03em; line-height: 1.05; }
+
+    /* ── PRICING ─────────────────────────── */
+    .pricing-bg {
+      background-color: var(--bg-elevated);
+      background-image:
+        radial-gradient(ellipse 70% 50% at 50% 0%, rgba(201,168,76,0.07) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 40% at 5% 100%, rgba(255,255,255,0.025) 0%, transparent 50%);
+    }
+    .tier-card {
+      background: rgba(255,255,255,0.022);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      transition: transform 0.4s cubic-bezier(0.34,1.4,0.64,1), border-color 0.3s ease, box-shadow 0.35s ease;
+    }
+    .tier-card:hover { transform: translateY(-3px); border-color: rgba(201,168,76,0.28); }
+    .tier-featured {
+      border-color: rgba(201,168,76,0.45);
+      background: rgba(201,168,76,0.04);
+      box-shadow: 0 0 0 1px rgba(201,168,76,0.15), 0 8px 32px -8px rgba(201,168,76,0.18);
+    }
+    .tier-featured:hover { transform: translateY(-4px); box-shadow: 0 0 0 1px rgba(201,168,76,0.2), 0 16px 40px -8px rgba(201,168,76,0.25); }
+    .tier-price { font-family: "Instrument Serif", Georgia, serif; letter-spacing: -0.04em; line-height: 1; }
+    .tier-name  { letter-spacing: 0.12em; text-transform: uppercase; }
+    .tier-feature { display: flex; align-items: flex-start; gap: 0.625rem; line-height: 1.55; color: var(--text-muted); }
+    .tier-feature::before { content: "—"; color: var(--accent); opacity: 0.7; flex-shrink: 0; margin-top: 0.05em; }
+
+    /* ── FAQ ─────────────────────────────── */
+    .faq-bg {
+      background-color: var(--bg);
+      background-image: radial-gradient(ellipse 50% 40% at 0% 50%, rgba(201,168,76,0.04) 0%, transparent 55%);
+    }
+    details.faq-item { border-bottom: 1px solid rgba(255,255,255,0.07); }
+    details.faq-item summary {
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.5rem 0;
+      font-family: "Instrument Serif", Georgia, serif;
+      font-size: 1.1875rem;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      color: var(--text);
+      transition: color 0.2s ease;
+    }
+    details.faq-item summary::-webkit-details-marker { display: none; }
+    details.faq-item summary:hover { color: var(--accent-bright); }
+    details.faq-item[open] summary { color: var(--accent); }
+    .faq-icon { flex-shrink: 0; width: 1.125rem; height: 1.125rem; color: var(--accent); opacity: 0.55; transition: transform 0.3s ease; }
+    details.faq-item[open] .faq-icon { transform: rotate(45deg); opacity: 1; }
+    .faq-answer { padding-bottom: 1.5rem; line-height: 1.72; color: var(--text-muted); max-width: 640px; }
+
+    /* ── FINAL CTA ───────────────────────── */
+    .cta-bg {
+      background-color: var(--bg-elevated);
+      background-image:
+        radial-gradient(ellipse 80% 65% at 50% 0%, var(--accent-dim) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 40% at 100% 100%, rgba(201,168,76,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse 40% 35% at 0% 80%, rgba(255,255,255,0.03) 0%, transparent 48%);
+    }
+    .cta-heading { font-family: "Instrument Serif", Georgia, serif; letter-spacing: -0.03em; line-height: 0.95; }
+    .ghl-embed-placeholder {
+      border: 1px dashed rgba(201,168,76,0.3);
+      border-radius: 8px;
+      background: rgba(201,168,76,0.025);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 220px;
+    }
+
+    /* ── BOOK FORM ───────────────────────── */
+    .form-field {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      color: var(--text);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .form-field::placeholder { color: rgba(155,155,163,0.45); }
+    .form-field:focus {
+      border-color: rgba(201,168,76,0.5);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.08);
+      outline: none;
+    }
+    select.form-field { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239b9ba3' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+    select.form-field option { background: #141416; color: var(--text); }
+
+    /* ── FOOTER ──────────────────────────── */
+    .footer-link { color: var(--text-muted); transition: color 0.2s ease; }
+    .footer-link:hover { color: var(--accent); }
+    .footer-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- SVG noise filter (referenced by noise overlays) -->
+  <svg class="absolute w-0 h-0" aria-hidden="true">
+    <filter id="noise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </svg>
+
+  <!-- ════════════════════════════════════════
+       NAV
+  ════════════════════════════════════════ -->
+  <nav id="main-nav" class="fixed inset-x-0 top-0 z-50" aria-label="Main navigation">
+    <div class="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-4 sm:px-8 lg:px-12">
+
+      <a href="#hero" class="font-body text-[0.6875rem] font-medium uppercase tracking-[0.22em] text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--text)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--accent)] focus-visible:outline-offset-2 focus-visible:rounded">
+        Zhed Consulting
+      </a>
+
+      <ul class="hidden items-center gap-7 md:flex" role="list">
+        <li><a href="#system"  class="font-body text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--text)]">How It Works</a></li>
+        <li><a href="#proof"   class="font-body text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--text)]">Results</a></li>
+        <li><a href="#pricing" class="font-body text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--text)]">Pricing</a></li>
+        <li><a href="#faq"     class="font-body text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--text)]">FAQ</a></li>
+      </ul>
+
+      <div class="hidden md:block">
+        <a href="#book" class="btn-primary font-body inline-flex items-center justify-center rounded-md px-5 py-2.5 text-[0.75rem] font-semibold tracking-wide">
+          Book a Strategy Call
+        </a>
+      </div>
+
+      <button id="nav-toggle" class="flex h-8 w-8 flex-col items-center justify-center gap-[5px] md:hidden" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span class="block h-px w-5 bg-[var(--text-muted)] transition-opacity duration-200"></span>
+        <span class="block h-px w-5 bg-[var(--text-muted)] transition-opacity duration-200"></span>
+        <span class="block h-px w-5 bg-[var(--text-muted)] transition-opacity duration-200"></span>
+      </button>
+    </div>
+
+    <div id="mobile-menu" class="hidden border-t md:hidden" style="border-color:rgba(255,255,255,0.05); background-color:rgba(12,12,14,0.97); backdrop-filter:blur(16px);">
+      <ul class="flex flex-col px-5 pt-3 pb-2" role="list">
+        <li><a href="#system"  class="mobile-link block py-3 font-body text-sm font-medium text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--text)]">How It Works</a></li>
+        <li><a href="#proof"   class="mobile-link block py-3 font-body text-sm font-medium text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--text)]">Results</a></li>
+        <li><a href="#pricing" class="mobile-link block py-3 font-body text-sm font-medium text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--text)]">Pricing</a></li>
+        <li><a href="#faq"     class="mobile-link block py-3 font-body text-sm font-medium text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--text)]">FAQ</a></li>
+      </ul>
+      <div class="px-5 pb-5 pt-2">
+        <a href="#book" class="mobile-link btn-primary font-body inline-flex w-full items-center justify-center rounded-md px-6 py-3.5 text-sm font-semibold tracking-wide">
+          Book a Strategy Call
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════════════
+       HERO
+  ════════════════════════════════════════ -->
+  <section id="hero" class="hero-bg relative flex min-h-[92vh] flex-col justify-center overflow-hidden pt-16 sm:min-h-[90vh] md:min-h-screen" aria-labelledby="hero-heading">
+    <div class="noise-overlay absolute inset-0 z-[1]" style="filter:url(#noise); background:#fff;" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-transparent via-transparent to-[var(--bg)] opacity-60" aria-hidden="true"></div>
+
+    <div class="relative z-10 mx-auto flex w-full max-w-6xl flex-col justify-center px-5 py-14 sm:px-8 sm:py-24 lg:px-12 lg:py-28">
+
+      <p class="trust-line font-body mb-6 text-[0.6875rem] font-medium uppercase tracking-[0.14em] sm:mb-7 sm:text-xs">
+        For home service contractors doing $30K–$500K/mo
+      </p>
+
+      <h1 id="hero-heading" class="hero-headline max-w-4xl text-[2.5rem] font-normal text-[var(--text)] sm:text-[3.25rem] md:text-6xl lg:text-[4.5rem] lg:leading-[0.92] xl:text-[5rem]">
+        We Don't Send You Leads.<br>
+        We Send You <em class="not-italic text-[var(--accent)]">Booked Appointments</em>.
+      </h1>
+
+      <p class="mt-7 max-w-xl text-[0.9375rem] leading-[1.7] text-[var(--text-muted)] sm:mt-8 sm:max-w-xl sm:text-lg md:max-w-2xl md:text-xl">
+        Built for epoxy, HVAC, roofing, and home service contractors — the Booked Solid System runs your ads, qualifies every inquiry with AI, and puts booked appointments on your calendar.
+      </p>
+
+      <div class="mt-10 flex w-full flex-col gap-3 sm:mt-12 sm:w-auto sm:flex-row sm:items-center sm:gap-4">
+        <a href="#book" class="btn-primary font-body inline-flex w-full items-center justify-center rounded-md px-7 py-4 text-sm font-semibold tracking-wide sm:w-auto sm:py-3.5 sm:text-base">
+          Book a Strategy Call
+        </a>
+        <a href="#system" class="btn-secondary font-body inline-flex w-full items-center justify-center rounded-md px-7 py-4 text-sm font-semibold tracking-wide sm:w-auto sm:py-3.5 sm:text-base">
+          See How It Works
+          <svg class="ml-2 h-4 w-4 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       TRUST STRIP
+  ════════════════════════════════════════ -->
+  <div aria-label="Trusted by">
+    <div class="mx-auto flex w-full max-w-6xl flex-col items-center gap-5 px-5 py-7 sm:flex-row sm:justify-between sm:px-8 lg:px-12" style="border-top:1px solid rgba(255,255,255,0.045); border-bottom:1px solid rgba(255,255,255,0.045);">
+      <p class="font-body whitespace-nowrap text-[0.625rem] font-medium uppercase tracking-[0.2em] text-[var(--text-muted)] opacity-40">
+        Trusted by contractors in
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-10">
+        <span class="font-body text-sm font-medium tracking-[0.04em] text-[var(--text-muted)] opacity-55">Niko — Metro Detroit Epoxy</span>
+        <!-- DATA NEEDED: logo/text slot 2 — swap div for <img> or a text name -->
+        <div class="h-4 w-28 rounded" style="background:rgba(255,255,255,0.06);" aria-hidden="true"></div>
+        <!-- DATA NEEDED: logo/text slot 3 — swap div for <img> or a text name -->
+        <div class="h-4 w-20 rounded" style="background:rgba(255,255,255,0.06);" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       THE PROBLEM
+  ════════════════════════════════════════ -->
+  <section id="problem" class="problem-bg relative overflow-hidden" aria-labelledby="problem-heading">
+    <div class="noise-overlay absolute inset-0 z-[1]" style="filter:url(#noise); background:#fff;" aria-hidden="true"></div>
+    <div class="section-divider absolute inset-x-0 top-0 z-[2] h-px" aria-hidden="true"></div>
+
+    <div class="relative z-10 mx-auto w-full max-w-6xl px-5 py-24 sm:px-8 sm:py-32 lg:px-12 lg:py-36">
+      <p class="section-overline font-body mb-7 text-[0.6875rem] font-medium uppercase tracking-[0.18em] sm:mb-8 sm:text-xs">What you're actually dealing with</p>
+
+      <h2 id="problem-heading" class="section-heading max-w-4xl text-[2rem] font-normal text-[var(--text)] sm:text-[2.75rem] md:text-[3.25rem] lg:text-[3.75rem]">
+        You don't have a lead problem.<br>
+        You have a <em class="not-italic text-[var(--accent)]">booked-appointment</em> problem.
+      </h2>
+
+      <p class="mt-7 max-w-2xl text-[0.9375rem] leading-[1.7] text-[var(--text-muted)] sm:mt-8 sm:text-lg">
+        Every contractor I talk to is drowning in the same three things. None of them are about needing "more leads."
+      </p>
+
+      <div class="mt-14 grid grid-cols-1 gap-5 sm:mt-16 sm:gap-6 md:grid-cols-3 lg:mt-20 lg:gap-7">
+
+        <article class="pain-card p-7 sm:p-8 lg:p-9">
+          <div class="pain-numeral mb-7 text-[4.5rem] sm:mb-8 sm:text-[5rem]">01</div>
+          <div class="pain-rule mb-5 h-px w-10 sm:mb-6" aria-hidden="true"></div>
+          <h3 class="pain-headline mb-3 text-[1.5rem] text-[var(--text)] sm:mb-4 sm:text-[1.75rem]">Form fills that never pick up the phone.</h3>
+          <p class="text-[0.9375rem] leading-[1.65] text-[var(--text-muted)] sm:text-base">
+            You're paying $80 a lead for people kicking tires at 11pm. Half won't answer. The other half wanted a price for a job they're never doing.
+          </p>
+        </article>
+
+        <article class="pain-card p-7 sm:p-8 lg:p-9">
+          <div class="pain-numeral mb-7 text-[4.5rem] sm:mb-8 sm:text-[5rem]">02</div>
+          <div class="pain-rule mb-5 h-px w-10 sm:mb-6" aria-hidden="true"></div>
+          <h3 class="pain-headline mb-3 text-[1.5rem] text-[var(--text)] sm:mb-4 sm:text-[1.75rem]">Agencies that send screenshots, not appointments.</h3>
+          <p class="text-[0.9375rem] leading-[1.65] text-[var(--text-muted)] sm:text-base">
+            Two grand a month for a Loom video, a dashboard you don't understand, and excuses about the algorithm. Your calendar looks the same as it did in January.
+          </p>
+        </article>
+
+        <article class="pain-card p-7 sm:p-8 lg:p-9">
+          <div class="pain-numeral mb-7 text-[4.5rem] sm:mb-8 sm:text-[5rem]">03</div>
+          <div class="pain-rule mb-5 h-px w-10 sm:mb-6" aria-hidden="true"></div>
+          <h3 class="pain-headline mb-3 text-[1.5rem] text-[var(--text)] sm:mb-4 sm:text-[1.75rem]">Crews on the clock, no jobs to run.</h3>
+          <p class="text-[0.9375rem] leading-[1.65] text-[var(--text-muted)] sm:text-base">
+            Three guys, a wrapped truck, and a Tuesday with one estimate on it. You're not short on capacity — you're short on appointments worth showing up to.
+          </p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       THE BOOKED SOLID SYSTEM
+  ════════════════════════════════════════ -->
+  <section id="system" class="system-bg relative overflow-hidden" aria-labelledby="system-heading">
+    <div class="section-divider absolute inset-x-0 top-0 h-px" aria-hidden="true"></div>
+
+    <div class="relative z-10 mx-auto w-full max-w-6xl px-5 py-24 sm:px-8 sm:py-32 lg:px-12 lg:py-36">
+      <p class="section-overline font-body mb-7 text-[0.6875rem] font-medium uppercase tracking-[0.18em] sm:mb-8 sm:text-xs">The Booked Solid System</p>
+
+      <h2 id="system-heading" class="section-heading max-w-2xl text-[2rem] font-normal text-[var(--text)] sm:text-[2.75rem] md:text-[3.25rem] lg:text-[3.75rem]">
+        Three steps.<br>One outcome.
+      </h2>
+
+      <p class="mt-6 max-w-xl text-[0.9375rem] leading-[1.7] text-[var(--text-muted)] sm:mt-7 sm:text-lg">
+        This is a system, not a service. Every step runs without you lifting a finger. You just show up to the appointment.
+      </p>
+
+      <div class="mt-14 grid grid-cols-1 gap-6 sm:mt-16 md:grid-cols-3 lg:mt-20 lg:gap-8">
+
+        <article class="step-card p-7 sm:p-8 lg:p-9">
+          <div class="step-number mb-5 text-[3.5rem] sm:text-[4rem]">01</div>
+          <div class="mb-5 flex h-9 w-9 items-center justify-center rounded-full" style="border:1px solid rgba(201,168,76,0.3); background:rgba(201,168,76,0.12);" aria-hidden="true">
+            <svg class="h-4 w-4 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5"/>
+            </svg>
+          </div>
+          <h3 class="step-title mb-3 text-[1.375rem] text-[var(--text)] sm:mb-4 sm:text-[1.625rem]">Meta Ads</h3>
+          <p class="text-[0.9375rem] leading-[1.65] text-[var(--text-muted)] sm:text-base">
+            We build and run campaigns targeting homeowners already in buying mode — not cold audiences scrolling past cat videos. Creative, copy, targeting. All of it handled.
+          </p>
+        </article>
+
+        <article class="step-card p-7 sm:p-8 lg:p-9">
+          <div class="step-number mb-5 text-[3.5rem] sm:text-[4rem]">02</div>
+          <div class="mb-5 flex h-9 w-9 items-center justify-center rounded-full" style="border:1px solid rgba(201,168,76,0.3); background:rgba(201,168,76,0.12);" aria-hidden="true">
+            <svg class="h-4 w-4 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"/>
+            </svg>
+          </div>
+          <h3 class="step-title mb-3 text-[1.375rem] text-[var(--text)] sm:mb-4 sm:text-[1.625rem]">Closebot AI Qualifier</h3>
+          <p class="text-[0.9375rem] leading-[1.65] text-[var(--text-muted)] sm:text-base">
+            Every inquiry gets a text follow-up within seconds. Closebot qualifies them on budget, timeline, and scope before a human touches the lead. Tire-kickers get filtered out. Real buyers get booked.
+          </p>
+        </article>
+
+        <article class="step-card p-7 sm:p-8 lg:p-9">
+          <div class="step-number mb-5 text-[3.5rem] sm:text-[4rem]">03</div>
+          <div class="mb-5 flex h-9 w-9 items-center justify-center rounded-full" style="border:1px solid rgba(201,168,76,0.3); background:rgba(201,168,76,0.12);" aria-hidden="true">
+            <svg class="h-4 w-4 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 9v7.5m-9-6h.008v.008H12V11.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM12 15h.008v.008H12V15zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-4.5 0h.008v.008H7.5V15zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
+            </svg>
+          </div>
+          <h3 class="step-title mb-3 text-[1.375rem] text-[var(--text)] sm:mb-4 sm:text-[1.625rem]">Booked Appointment</h3>
+          <p class="text-[0.9375rem] leading-[1.65] text-[var(--text-muted)] sm:text-base">
+            Qualified prospects book directly onto your calendar through GHL. You show up. You close. Nothing else is your job.
+          </p>
+        </article>
+
+      </div>
+
+      <p class="mt-9 hidden text-center font-body text-[0.625rem] font-medium uppercase tracking-[0.22em] text-[var(--text-muted)] opacity-35 md:block" aria-hidden="true">
+        Meta Ads &nbsp;→&nbsp; Closebot AI &nbsp;→&nbsp; Booked Appointment
+      </p>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       PROOF
+  ════════════════════════════════════════ -->
+  <section id="proof" class="proof-bg relative overflow-hidden" aria-labelledby="proof-heading">
+    <div class="section-divider absolute inset-x-0 top-0 h-px" aria-hidden="true"></div>
+
+    <div class="relative z-10 mx-auto w-full max-w-6xl px-5 py-24 sm:px-8 sm:py-32 lg:px-12 lg:py-36">
+      <p class="section-overline font-body mb-7 text-[0.6875rem] font-medium uppercase tracking-[0.18em] sm:mb-8 sm:text-xs">It works. Here's the receipts.</p>
+
+      <h2 id="proof-heading" class="section-heading mb-14 max-w-2xl text-[2rem] font-normal text-[var(--text)] sm:mb-16 sm:text-[2.75rem] md:text-[3.25rem] lg:mb-20 lg:text-[3.5rem]">
+        Real contractor.<br>Real numbers.
+      </h2>
+
+      <div class="case-study-card p-8 sm:p-10 lg:p-12">
+
+        <div class="mb-8 flex flex-col gap-4 sm:mb-10 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <p class="font-body text-[0.625rem] font-medium uppercase tracking-[0.18em] text-[var(--text-muted)] opacity-50">Client</p>
+            <p class="mt-1.5 font-display text-xl text-[var(--text)] sm:text-2xl">Niko</p>
+          </div>
+          <div class="sm:text-right">
+            <p class="font-body text-[0.625rem] font-medium uppercase tracking-[0.18em] text-[var(--text-muted)] opacity-50">Vertical / Market</p>
+            <p class="mt-1.5 font-body text-sm text-[var(--text-muted)]">Epoxy Flooring — Metro Detroit, MI</p>
+          </div>
+        </div>
+
+        <div class="mb-8 h-px sm:mb-10" style="background:rgba(255,255,255,0.06);"></div>
+
+        <div class="mb-10 grid grid-cols-3 gap-6 sm:mb-12 sm:gap-10">
+          <div>
+            <p class="metric-value text-[2rem] sm:text-[2.5rem]">$1,120</p>
+            <p class="mt-2 text-[0.8125rem] leading-[1.45] text-[var(--text-muted)] sm:text-sm">Total<br>Ad Spend</p>
+          </div>
+          <div>
+            <p class="metric-value text-[2rem] sm:text-[2.5rem]">445</p>
+            <p class="mt-2 text-[0.8125rem] leading-[1.45] text-[var(--text-muted)] sm:text-sm">Leads<br>Generated</p>
+          </div>
+          <div>
+            <p class="metric-value text-[2rem] sm:text-[2.5rem]">$2.51</p>
+            <p class="mt-2 text-[0.8125rem] leading-[1.45] text-[var(--text-muted)] sm:text-sm">Cost<br>Per Lead</p>
+          </div>
+        </div>
+
+        <div class="mb-8 h-px sm:mb-10" style="background:rgba(255,255,255,0.06);"></div>
+
+        <figure>
+          <blockquote>
+            <p class="testimonial-quote max-w-2xl text-[1.125rem] text-[var(--text)] sm:text-[1.25rem] lg:text-[1.375rem]">
+              "We're killing it."
+            </p>
+          </blockquote>
+          <figcaption class="mt-5 font-body text-sm text-[var(--text-muted)]">
+            Niko, Owner — Epoxy Flooring, Metro Detroit
+          </figcaption>
+        </figure>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       ORIGIN / ABOUT
+  ════════════════════════════════════════ -->
+  <section id="about" class="origin-bg relative overflow-hidden" aria-labelledby="about-heading">
+    <div class="section-divider absolute inset-x-0 top-0 h-px" aria-hidden="true"></div>
+
+    <div class="relative z-10 mx-auto w-full max-w-6xl px-5 py-24 sm:px-8 sm:py-32 lg:px-12 lg:py-36">
+      <p class="section-overline font-body mb-10 text-[0.6875rem] font-medium uppercase tracking-[0.18em] sm:mb-12 sm:text-xs">Why Zhed Consulting</p>
+
+      <h2 id="about-heading" class="origin-pullquote mb-10 max-w-4xl text-[2rem] font-normal text-[var(--text)] sm:mb-12 sm:text-[2.5rem] md:text-[3rem] lg:text-[3.5rem]">
+        "I'm not a marketer<br class="hidden sm:block"> who learned sales.<br>
+        I'm a closer who<br class="hidden md:block"> learned marketing."
+      </h2>
+
+      <div class="mb-10 h-px w-14 sm:mb-12" style="background:rgba(201,168,76,0.35);"></div>
+
+      <div class="max-w-2xl space-y-5">
+        <p class="text-[0.9375rem] leading-[1.75] text-[var(--text-muted)] sm:text-lg">
+          Grew up in Cebu. Got to America and learned to sell door-to-door — knocking houses, handling objections face-to-face, getting a yes or a no in the next thirty seconds. The kind of sales where you learn fast or go home with nothing.
+        </p>
+        <p class="text-[0.9375rem] leading-[1.75] text-[var(--text-muted)] sm:text-lg">
+          From D2D I moved to phone sales, then to building the backend systems — ads, AI follow-up, GHL pipelines — that move strangers into appointments at scale. I started Zhed Consulting because I kept watching great contractors get burned by marketers who had no idea how to sell. This system is what a closer would build.
+        </p>
+      </div>
+
+      <div class="mt-10 flex items-center gap-4 sm:mt-12">
+        <div class="h-px w-7" style="background:rgba(201,168,76,0.4);"></div>
+        <p class="font-display text-base italic text-[var(--text-muted)] opacity-70">Zhed, Founder — Zhed Consulting</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       PRICING
+  ════════════════════════════════════════ -->
+  <section id="pricing" class="pricing-bg relative overflow-hidden" aria-labelledby="pricing-heading">
+    <div class="section-divider absolute inset-x-0 top-0 h-px" aria-hidden="true"></div>
+
+    <div class="relative z-10 mx-auto w-full max-w-6xl px-5 py-24 sm:px-8 sm:py-32 lg:px-12 lg:py-36">
+      <p class="section-overline font-body mb-7 text-[0.6875rem] font-medium uppercase tracking-[0.18em] sm:mb-8 sm:text-xs">Tiers</p>
+
+      <h2 id="pricing-heading" class="section-heading mb-4 max-w-3xl text-[2rem] font-normal text-[var(--text)] sm:text-[2.75rem] md:text-[3.25rem] lg:text-[3.5rem]">
+        Pick the level of growth<br>you're ready for.
+      </h2>
+      <p class="mb-14 max-w-xl text-[0.9375rem] leading-[1.7] text-[var(--text-muted)] sm:mb-16 sm:text-base lg:mb-20">
+        Every tier runs the full system — ads, AI qualifier, GHL pipeline. The difference is volume, depth, and support.
+      </p>
+
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-3 md:items-stretch lg:gap-6">
+
+        <!-- Starter -->
+        <article class="tier-card flex flex-col p-7 sm:p-8 lg:p-9">
+          <p class="tier-name mb-4 font-body text-[0.6875rem] font-medium text-[var(--text-muted)] sm:text-xs">Starter</p>
+          <p class="tier-price mb-1 text-[3rem] font-normal text-[var(--text)] sm:text-[3.25rem]">$2,500</p>
+          <p class="mb-8 font-body text-sm text-[var(--text-muted)] opacity-60 sm:mb-10">/month</p>
+          <ul class="mb-8 flex flex-col gap-3 sm:mb-10" role="list">
+            <li class="tier-feature text-[0.9375rem] sm:text-base">Meta Ads setup and management</li>
+            <li class="tier-feature text-[0.9375rem] sm:text-base">Closebot AI lead qualification</li>
+            <li class="tier-feature text-[0.9375rem] sm:text-base">GHL pipeline and calendar booking</li>
+            <li class="tier-feature text-[0.9375rem] sm:text-base">Monthly performance report</li>
+          </ul>
+          <div class="mt-auto">
+            <a href="#book" class="btn-secondary font-body inline-flex w-full items-center justify-center rounded-md px-6 py-3.5 text-sm font-semibold tracking-wide">
+              Book a Strategy Call
+            </a>
+          </div>
+        </article>
+
+        <!-- Growth (featured) -->
+        <article class="tier-card tier-featured flex flex-col p-7 sm:p-8 lg:p-9">
+          <div class="mb-4 flex items-center justify-between">
+            <p class="tier-name font-body text-[0.6875rem] font-medium text-[var(--accent)] sm:text-xs">Growth</p>
+            <span class="rounded-full px-2.5 py-0.5 font-body text-[0.625rem] font-semibold uppercase tracking-[0.1em] text-[var(--accent)]" style="border:1px solid rgba(201,168,76,0.35); background:rgba(201,168,76,0.1);">
+              Most Popular
+            </span>
+          </div>
+          <p class="tier-price mb-1 text-[3rem] font-normal text-[var(--text)] sm:text-[3.25rem]">$5,000</p>
+          <p class="mb-8 font-body text-sm text-[var(--text-muted)] opacity-60 sm:mb-10">/month</p>
+          <ul class="mb-8 flex flex-col gap-3 sm:mb-10" role="list">
+            <li class="tier-feature text-[0.9375rem] sm:text-base">Everything in Starter</li>
+            <li class="tier-feature text-[0.9375rem] sm:text-base">Advanced audience targeting and retargeting</li>
+            <li class="tier-feature text-[0.9375rem] sm:text-base">A/B creative testing and iteration</li>
+            <li class="tier-feature text-[0.9375rem] sm:text-base">Weekly check-in call</li>
+            <li class="tier-feature text-[0.9375rem] sm:text-base">Priority support</li>
+          </ul>
+          <div class="mt-auto">
+            <a href="#book" class="btn-primary font-body inline-flex w-full items-center justify-center rounded-md px-6 py-3.5 text-sm font-semibold tracking-wide">
+              Book a Strategy Call
+            </a>
+          </div>
+        </article>
+
+        <!-- Elite -->
+        <article class="tier-card flex flex-col p-7 sm:p-8 lg:p-9">
+          <p class="tier-name mb-4 font-body text-[0.6875rem] font-medium text-[var(--text-muted)] sm:text-xs">Elite</p>
+          <p class="tier-price mb-1 text-[3rem] font-normal text-[var(--text)] sm:text-[3.25rem]">$10,000</p>
+          <p class="mb-8 font-body text-sm text-[var(--text-muted)] opacity-60 sm:mb-10">/month</p>
+          <ul class="mb-8 flex flex-col gap-3 sm:mb-10" role="list">
+            <li class="tier-feature text-[0.9375rem] sm:text-base">Everything in Growth</li>
+            <li class="tier-feature text-[0.9375rem] sm:text-base">Multi-market or multi-vertical expansion</li>
+            <li class="tier-feature text-[0.9375rem] sm:text-base">Custom AI qualification flows</li>
+            <li class="tier-feature text-[0.9375rem] sm:text-base">Dedicated account management</li>
+            <!-- DATA NEEDED: additional Elite deliverable if applicable -->
+          </ul>
+          <div class="mt-auto">
+            <a href="#book" class="btn-secondary font-body inline-flex w-full items-center justify-center rounded-md px-6 py-3.5 text-sm font-semibold tracking-wide">
+              Book a Strategy Call
+            </a>
+          </div>
+        </article>
+
+      </div>
+
+      <p class="mt-8 text-[0.8125rem] leading-[1.6] text-[var(--text-muted)] opacity-55 sm:mt-10">
+        Management fee is separate from ad spend. Most clients run $1,500–$2,000/mo in ad spend on top of the management fee — exact numbers are covered on the strategy call.
+      </p>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       FAQ
+  ════════════════════════════════════════ -->
+  <section id="faq" class="faq-bg relative overflow-hidden" aria-labelledby="faq-heading">
+    <div class="section-divider absolute inset-x-0 top-0 h-px" aria-hidden="true"></div>
+
+    <div class="relative z-10 mx-auto w-full max-w-6xl px-5 py-24 sm:px-8 sm:py-32 lg:px-12 lg:py-36">
+      <p class="section-overline font-body mb-7 text-[0.6875rem] font-medium uppercase tracking-[0.18em] sm:mb-8 sm:text-xs">Common Questions</p>
+
+      <h2 id="faq-heading" class="section-heading mb-14 max-w-2xl text-[2rem] font-normal text-[var(--text)] sm:mb-16 sm:text-[2.75rem] md:text-[3.25rem] lg:mb-20 lg:text-[3.5rem]">
+        Everything you're<br>about to ask.
+      </h2>
+
+      <div class="max-w-3xl" style="border-top:1px solid rgba(255,255,255,0.07);">
+
+        <details class="faq-item">
+          <summary>
+            Do I need to sign a long-term contract?
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+          </summary>
+          <p class="faq-answer text-[0.9375rem] sm:text-base">
+            No. Month-to-month. If it's not working, you shouldn't stay. But most clients don't leave because it works.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            How much do I need to spend on ads?
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+          </summary>
+          <p class="faq-answer text-[0.9375rem] sm:text-base">
+            The management fee is separate from your ad budget. Minimum recommended spend is around $1,500/mo — less than that and Meta's algorithm doesn't have enough volume to optimize. Exact numbers depend on your market and vertical; we cover this on the strategy call.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            What makes this different from every other agency?
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+          </summary>
+          <p class="faq-answer text-[0.9375rem] sm:text-base">
+            Most agencies hand you a lead and call it a day. We handle the follow-up, the qualification, and the booking — the three places contractors bleed money. By the time a name lands on your calendar, they've already been through a full qualification process. You're not chasing anyone.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            What if I don't get results?
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+          </summary>
+          <p class="faq-answer text-[0.9375rem] sm:text-base">
+            We don't hide behind a 90-day "ramp period." If the system isn't performing, we'll tell you before you ask — and we'll fix it or part ways. Taking money for a system that isn't working isn't how this runs.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            Who is this NOT for?
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+          </summary>
+          <p class="faq-answer text-[0.9375rem] sm:text-base">
+            Contractors who can't close. This system books qualified appointments — it doesn't win jobs for you. If your problem is converting estimates you already have, fix that first and come back. Also not for anyone under $30K monthly revenue — the economics don't work at that level, and I'd rather tell you now than take your money.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            How fast will I see booked appointments?
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+          </summary>
+          <p class="faq-answer text-[0.9375rem] sm:text-base">
+            Most clients see their first booked appointments within 7–14 days of launch. Ad accounts need a few days to exit Meta's learning phase. We set realistic timelines on the strategy call — no promises we can't keep.
+          </p>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       FINAL CTA
+  ════════════════════════════════════════ -->
+  <section id="book" class="cta-bg relative overflow-hidden" aria-labelledby="cta-heading">
+    <div class="section-divider absolute inset-x-0 top-0 h-px" aria-hidden="true"></div>
+    <div class="noise-overlay absolute inset-0 z-[1]" style="filter:url(#noise); background:#fff;" aria-hidden="true"></div>
+
+    <div class="relative z-10 mx-auto w-full max-w-4xl px-5 py-24 text-center sm:px-8 sm:py-32 lg:px-12 lg:py-36">
+      <p class="section-overline font-body mb-8 inline-block text-[0.6875rem] font-medium uppercase tracking-[0.18em] sm:mb-10 sm:text-xs">Let's talk</p>
+
+      <h2 id="cta-heading" class="cta-heading mb-5 text-[2.5rem] font-normal text-[var(--text)] sm:mb-6 sm:text-[3.25rem] md:text-[3.75rem] lg:text-[4.5rem]">
+        Ready to fill<br>your calendar?
+      </h2>
+
+      <p class="mx-auto mb-12 max-w-md text-[0.9375rem] leading-[1.7] text-[var(--text-muted)] sm:mb-14 sm:text-lg">
+        Book a 20-minute strategy call. We'll look at your market, your current numbers, and tell you exactly what this system would do for your business.
+      </p>
+
+      <!-- GHL FORM EMBED: replace this form block with your GHL iframe -->
+      <form class="mx-auto mb-8 w-full max-w-md text-left" onsubmit="return false;" aria-label="Book a strategy call">
+        <div class="flex flex-col gap-4">
+          <div class="flex flex-col gap-1.5">
+            <label for="form-name" class="font-body text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-[var(--text-muted)]">Full Name</label>
+            <input id="form-name" type="text" placeholder="John Smith" class="form-field w-full rounded-md px-4 py-3 font-body text-sm text-[var(--text)]" />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label for="form-phone" class="font-body text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-[var(--text-muted)]">Phone Number</label>
+            <input id="form-phone" type="tel" placeholder="(313) 000-0000" class="form-field w-full rounded-md px-4 py-3 font-body text-sm text-[var(--text)]" />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label for="form-vertical" class="font-body text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-[var(--text-muted)]">Your Trade</label>
+            <select id="form-vertical" class="form-field w-full rounded-md px-4 py-3 font-body text-sm text-[var(--text)]">
+              <option value="" disabled selected>Select your vertical</option>
+              <option>Epoxy Flooring</option>
+              <option>HVAC</option>
+              <option>Plumbing</option>
+              <option>Electrical</option>
+              <option>Roofing</option>
+              <option>Spray Foam Insulation</option>
+              <option>Mold Remediation</option>
+              <option>Foundation Repair</option>
+              <option>Concrete Coatings</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label for="form-revenue" class="font-body text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-[var(--text-muted)]">Monthly Revenue</label>
+            <select id="form-revenue" class="form-field w-full rounded-md px-4 py-3 font-body text-sm text-[var(--text)]">
+              <option value="" disabled selected>Select a range</option>
+              <option>Under $30K/mo</option>
+              <option>$30K – $75K/mo</option>
+              <option>$75K – $150K/mo</option>
+              <option>$150K – $500K/mo</option>
+              <option>$500K+/mo</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-primary mt-2 w-full rounded-md px-8 py-4 font-body text-sm font-semibold uppercase tracking-[0.1em]">
+            Book My Strategy Call
+          </button>
+        </div>
+      </form>
+
+      <p class="font-body text-[0.8125rem] text-[var(--text-muted)] opacity-50 sm:text-sm">
+        Takes 60 seconds to book. No sales pressure — if we're not a fit, I'll tell you.
+      </p>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════ -->
+  <footer aria-label="Site footer" style="background-color:var(--bg); border-top:1px solid rgba(255,255,255,0.06);">
+    <div class="mx-auto w-full max-w-6xl px-5 py-12 sm:px-8 sm:py-14 lg:px-12">
+      <div class="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
+        <div class="max-w-xs">
+          <p class="font-display text-lg text-[var(--text)]">Zhed Consulting</p>
+          <p class="mt-2 font-body text-sm leading-[1.6] text-[var(--text-muted)] opacity-55">
+            More booked appointments. More money.
+          </p>
+        </div>
+        <nav aria-label="Footer navigation">
+          <ul class="flex flex-wrap gap-x-6 gap-y-2.5" role="list">
+            <li><a href="#system"  class="footer-link font-body text-sm">How It Works</a></li>
+            <li><a href="#proof"   class="footer-link font-body text-sm">Results</a></li>
+            <li><a href="#pricing" class="footer-link font-body text-sm">Pricing</a></li>
+            <li><a href="#about"   class="footer-link font-body text-sm">About</a></li>
+            <li><a href="#faq"     class="footer-link font-body text-sm">FAQ</a></li>
+            <li><a href="#book"    class="footer-link font-body text-sm">Book a Call</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="mt-10 flex flex-col gap-2 pt-8 sm:flex-row sm:items-center sm:justify-between" style="border-top:1px solid rgba(255,255,255,0.05);">
+        <p class="font-body text-xs text-[var(--text-muted)] opacity-35">© 2025 Zhed Consulting. All rights reserved.</p>
+        <p class="font-body text-xs text-[var(--text-muted)] opacity-35">Metro Detroit, MI</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll behavior
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', function() {
+      nav.classList.toggle('nav-scrolled', window.scrollY > 24);
+    }, { passive: true });
+
+    // Mobile menu
+    const toggle = document.getElementById('nav-toggle');
+    const menu   = document.getElementById('mobile-menu');
+    toggle.addEventListener('click', function() {
+      const open = menu.classList.toggle('hidden');
+      toggle.setAttribute('aria-expanded', String(!open));
+    });
+    document.querySelectorAll('.mobile-link').forEach(function(link) {
+      link.addEventListener('click', function() {
+        menu.classList.add('hidden');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
+
+</body>
+</html>

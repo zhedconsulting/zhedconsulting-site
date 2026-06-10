@@ -1,0 +1,13 @@
+{
+  "name": "zhedconsulting-site",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "node serve.mjs",
+    "screenshot": "node screenshot.mjs http://localhost:3000"
+  },
+  "dependencies": {
+    "puppeteer": "^24.10.0"
+  }
+}

@@ -1,0 +1,11 @@
+import puppeteer from 'puppeteer';
+const [,, url, width, label] = process.argv;
+const w = parseInt(width, 10);
+const browser = await puppeteer.launch();
+const page = await browser.newPage();
+await page.setViewport({ width: w, height: 900, deviceScaleFactor: 1 });
+await page.goto(url, { waitUntil: 'networkidle0' });
+const path = `./temporary screenshots/custom-${label}.png`;
+await page.screenshot({ path, fullPage: true });
+await browser.close();
+console.log(path);
