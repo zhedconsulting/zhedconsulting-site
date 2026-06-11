@@ -775,31 +775,58 @@
 
       <div class="case-study-card p-8 sm:p-10 lg:p-12">
 
-        <div class="mb-8 flex flex-col gap-4 sm:mb-10 sm:flex-row sm:items-start sm:justify-between">
+        <!-- Header -->
+        <div class="mb-8 flex flex-col gap-5 sm:mb-10 sm:flex-row sm:items-start sm:justify-between">
           <div>
             <p class="font-body text-[0.625rem] font-medium uppercase tracking-[0.18em] text-[var(--text-muted)] opacity-50">Client</p>
             <p class="mt-1.5 font-display text-xl text-[var(--text)] sm:text-2xl">Niko</p>
           </div>
-          <div class="sm:text-right">
-            <p class="font-body text-[0.625rem] font-medium uppercase tracking-[0.18em] text-[var(--text-muted)] opacity-50">Vertical / Market</p>
-            <p class="mt-1.5 font-body text-sm text-[var(--text-muted)]">Epoxy Flooring — Metro Detroit, MI</p>
+          <div class="flex flex-wrap gap-2 sm:justify-end">
+            <span class="inline-flex items-center rounded-full px-2.5 py-1 font-body text-[0.625rem] font-medium uppercase tracking-[0.1em]" style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);color:var(--accent);">Epoxy Flooring</span>
+            <span class="inline-flex items-center rounded-full px-2.5 py-1 font-body text-[0.625rem] font-medium uppercase tracking-[0.1em]" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--text-muted);">Metro Detroit, MI</span>
+            <span class="inline-flex items-center rounded-full px-2.5 py-1 font-body text-[0.625rem] font-medium uppercase tracking-[0.1em]" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--text-muted);">Meta Ads</span>
           </div>
         </div>
 
         <div class="mb-8 h-px sm:mb-10" style="background:rgba(255,255,255,0.06);"></div>
 
-        <div class="mb-10 grid grid-cols-3 gap-6 sm:mb-12 sm:gap-10">
+        <!-- Primary metrics — the numbers that matter -->
+        <div class="mb-8 grid grid-cols-3 gap-4 sm:mb-10 sm:gap-8 lg:gap-12">
           <div>
-            <p class="metric-value text-[2rem] sm:text-[2.5rem]">$1,120</p>
-            <p class="mt-2 text-[0.8125rem] leading-[1.45] text-[var(--text-muted)] sm:text-sm">Total<br>Ad Spend</p>
+            <p class="metric-value text-[2rem] sm:text-[2.75rem] lg:text-[3rem]">$1,120</p>
+            <p class="mt-2 font-body text-[0.8125rem] font-semibold leading-[1.45] text-[var(--text-muted)] sm:text-sm">Total<br>Ad Spend</p>
           </div>
           <div>
-            <p class="metric-value text-[2rem] sm:text-[2.5rem]">445</p>
-            <p class="mt-2 text-[0.8125rem] leading-[1.45] text-[var(--text-muted)] sm:text-sm">Leads<br>Generated</p>
+            <p class="metric-value text-[2rem] sm:text-[2.75rem] lg:text-[3rem]">66</p>
+            <p class="mt-2 font-body text-[0.8125rem] font-semibold leading-[1.45] text-[var(--text-muted)] sm:text-sm">Survey<br>Submissions</p>
           </div>
           <div>
-            <p class="metric-value text-[2rem] sm:text-[2.5rem]">$2.51</p>
-            <p class="mt-2 text-[0.8125rem] leading-[1.45] text-[var(--text-muted)] sm:text-sm">Cost<br>Per Lead</p>
+            <p class="metric-value text-[2rem] sm:text-[2.75rem] lg:text-[3rem]">$16.97</p>
+            <p class="mt-2 font-body text-[0.8125rem] font-semibold leading-[1.45] text-[var(--text-muted)] sm:text-sm">Cost Per<br>Qualified Lead</p>
+          </div>
+        </div>
+
+        <!-- Secondary detail grid -->
+        <div class="mb-8 grid grid-cols-2 gap-3 sm:mb-10 sm:grid-cols-4 sm:gap-4">
+          <div class="rounded-lg p-3.5 sm:p-4" style="background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);">
+            <p class="mb-1.5 font-body text-[0.5625rem] font-medium uppercase tracking-[0.14em] text-[var(--text-muted)] opacity-50">Ad Platform</p>
+            <p class="font-body text-[0.9375rem] font-medium text-[var(--text)]">Meta Ads</p>
+            <p class="mt-0.5 font-body text-[0.75rem] text-[var(--text-muted)] opacity-55">Facebook + Instagram</p>
+          </div>
+          <div class="rounded-lg p-3.5 sm:p-4" style="background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);">
+            <p class="mb-1.5 font-body text-[0.5625rem] font-medium uppercase tracking-[0.14em] text-[var(--text-muted)] opacity-50">Lead Funnel</p>
+            <p class="font-body text-[0.9375rem] font-medium text-[var(--text)]">GHL Survey</p>
+            <p class="mt-0.5 font-body text-[0.75rem] text-[var(--text-muted)] opacity-55">Website submission</p>
+          </div>
+          <div class="rounded-lg p-3.5 sm:p-4" style="background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);">
+            <p class="mb-1.5 font-body text-[0.5625rem] font-medium uppercase tracking-[0.14em] text-[var(--text-muted)] opacity-50">Target Market</p>
+            <p class="font-body text-[0.9375rem] font-medium text-[var(--text)]">Metro Detroit</p>
+            <p class="mt-0.5 font-body text-[0.75rem] text-[var(--text-muted)] opacity-55">SE Michigan, residential</p>
+          </div>
+          <div class="rounded-lg p-3.5 sm:p-4" style="background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.18);">
+            <p class="mb-1.5 font-body text-[0.5625rem] font-medium uppercase tracking-[0.14em] text-[var(--accent)] opacity-70">Strategy</p>
+            <p class="font-body text-[0.9375rem] font-medium text-[var(--text)]">Survey > Lead Form</p>
+            <p class="mt-0.5 font-body text-[0.75rem] text-[var(--text-muted)] opacity-55">Higher intent leads</p>
           </div>
         </div>
 
