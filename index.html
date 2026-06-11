@@ -300,6 +300,16 @@
     select.form-field { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239b9ba3' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
     select.form-field option { background: #141416; color: var(--text); }
 
+    /* ── BEAMS ───────────────────────────── */
+    .beams-canvas { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:0; }
+    @keyframes beams-pulse { 0%,100%{opacity:0.04} 50%{opacity:0.12} }
+    .beams-pulse-overlay {
+      position:absolute; inset:0; z-index:2;
+      background:rgba(12,12,14,0.06);
+      animation:beams-pulse 10s ease-in-out infinite;
+      pointer-events:none;
+    }
+
     /* ── FOOTER ──────────────────────────── */
     .footer-link { color: var(--text-muted); transition: color 0.2s ease; }
     .footer-link:hover { color: var(--accent); }
@@ -365,6 +375,8 @@
        HERO
   ════════════════════════════════════════ -->
   <section id="hero" class="hero-bg relative flex min-h-[92vh] flex-col justify-center overflow-hidden pt-16 sm:min-h-[90vh] md:min-h-screen" aria-labelledby="hero-heading">
+    <canvas id="hero-beams" class="beams-canvas" aria-hidden="true"></canvas>
+    <div class="beams-pulse-overlay" aria-hidden="true"></div>
     <div class="noise-overlay absolute inset-0 z-[1]" style="filter:url(#noise); background:#fff;" aria-hidden="true"></div>
     <div class="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-transparent via-transparent to-[var(--bg)] opacity-60" aria-hidden="true"></div>
 
@@ -944,6 +956,8 @@
        FINAL CTA
   ════════════════════════════════════════ -->
   <section id="book" class="cta-bg relative overflow-hidden" aria-labelledby="cta-heading">
+    <canvas id="cta-beams" class="beams-canvas" aria-hidden="true"></canvas>
+    <div class="beams-pulse-overlay" aria-hidden="true"></div>
     <div class="section-divider absolute inset-x-0 top-0 h-px" aria-hidden="true"></div>
     <div class="noise-overlay absolute inset-0 z-[1]" style="filter:url(#noise); background:#fff;" aria-hidden="true"></div>
 
@@ -1058,6 +1072,92 @@
         toggle.setAttribute('aria-expanded', 'false');
       });
     });
+
+    // Beams background
+    function initBeams(canvasEl, count) {
+      if (!canvasEl) return;
+      var ctx = canvasEl.getContext('2d');
+      if (!ctx) return;
+      var beams = [];
+      var raf;
+
+      function createBeam() {
+        var w = canvasEl.offsetWidth, h = canvasEl.offsetHeight;
+        return {
+          x: Math.random() * w * 1.5 - w * 0.25,
+          y: Math.random() * h * 1.5 - h * 0.25,
+          width: 28 + Math.random() * 55,
+          length: h * 2.5,
+          angle: -35 + Math.random() * 10,
+          speed: 0.45 + Math.random() * 0.9,
+          opacity: 0.09 + Math.random() * 0.13,
+          hue: 36 + Math.random() * 16,
+          pulse: Math.random() * Math.PI * 2,
+          pulseSpeed: 0.018 + Math.random() * 0.022
+        };
+      }
+
+      function resetBeam(b, i) {
+        var w = canvasEl.offsetWidth, h = canvasEl.offsetHeight;
+        var col = i % 3, spacing = w / 3;
+        b.y = h + 100;
+        b.x = col * spacing + spacing / 2 + (Math.random() - 0.5) * spacing * 0.5;
+        b.width = 70 + Math.random() * 75;
+        b.speed = 0.4 + Math.random() * 0.5;
+        b.hue = 36 + Math.random() * 16;
+        b.opacity = 0.09 + Math.random() * 0.1;
+      }
+
+      function resize() {
+        var dpr = Math.min(window.devicePixelRatio || 1, 2);
+        var w = canvasEl.parentElement.offsetWidth;
+        var h = canvasEl.parentElement.offsetHeight;
+        canvasEl.width = w * dpr;
+        canvasEl.height = h * dpr;
+        canvasEl.style.width = w + 'px';
+        canvasEl.style.height = h + 'px';
+        ctx.scale(dpr, dpr);
+        beams = Array.from({ length: count }, createBeam);
+      }
+
+      function draw(b) {
+        ctx.save();
+        ctx.translate(b.x, b.y);
+        ctx.rotate(b.angle * Math.PI / 180);
+        var p = b.opacity * (0.8 + Math.sin(b.pulse) * 0.2);
+        var g = ctx.createLinearGradient(0, 0, 0, b.length);
+        g.addColorStop(0,   'hsla(' + b.hue + ',72%,56%,0)');
+        g.addColorStop(0.1, 'hsla(' + b.hue + ',72%,56%,' + (p * 0.5).toFixed(3) + ')');
+        g.addColorStop(0.4, 'hsla(' + b.hue + ',72%,56%,' + p.toFixed(3) + ')');
+        g.addColorStop(0.6, 'hsla(' + b.hue + ',72%,56%,' + p.toFixed(3) + ')');
+        g.addColorStop(0.9, 'hsla(' + b.hue + ',72%,56%,' + (p * 0.5).toFixed(3) + ')');
+        g.addColorStop(1,   'hsla(' + b.hue + ',72%,56%,0)');
+        ctx.fillStyle = g;
+        ctx.fillRect(-b.width / 2, 0, b.width, b.length);
+        ctx.restore();
+      }
+
+      function animate() {
+        var w = canvasEl.offsetWidth, h = canvasEl.offsetHeight;
+        ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
+        ctx.filter = 'blur(28px)';
+        for (var i = 0; i < beams.length; i++) {
+          var b = beams[i];
+          b.y -= b.speed;
+          b.pulse += b.pulseSpeed;
+          if (b.y + b.length < -100) resetBeam(b, i);
+          draw(b);
+        }
+        raf = requestAnimationFrame(animate);
+      }
+
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+      animate();
+    }
+
+    initBeams(document.getElementById('hero-beams'), 14);
+    initBeams(document.getElementById('cta-beams'), 11);
 
     // Scroll tilt animation
     (function () {
