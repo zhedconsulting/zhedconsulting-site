@@ -586,9 +586,9 @@
     #cal-modal.is-open #cal-modal-sheet { transform:translateY(0); }
     @media (min-width:640px) {
       #cal-modal { align-items:center; padding:2rem; box-sizing:border-box; }
-      #cal-modal-sheet { height:auto; max-height:calc(100dvh - 4rem); max-width:660px; border-radius:1.25rem; overflow:hidden; overflow-y:auto; transform:translateY(16px) scale(0.97); opacity:0; transition:transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s; }
+      #cal-modal-sheet { height:calc(100dvh - 4rem); max-width:660px; border-radius:1.25rem; overflow:hidden; transform:translateY(16px) scale(0.97); opacity:0; transition:transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s; }
       #cal-modal.is-open #cal-modal-sheet { transform:translateY(0) scale(1); opacity:1; }
-      #cal-iframe-mobile { min-height:800px; flex:none; }
+      #cal-iframe-mobile { flex:1; min-height:0; height:100%; }
     }
   </style>
 </head>
