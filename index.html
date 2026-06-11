@@ -585,9 +585,10 @@
     #cal-modal-sheet { position:relative; width:100%; max-width:520px; height:100dvh; border-radius:0; overflow:hidden; background:#fff; display:flex; flex-direction:column; transform:translateY(100%); transition:transform 0.35s cubic-bezier(0.4,0,0.2,1); }
     #cal-modal.is-open #cal-modal-sheet { transform:translateY(0); }
     @media (min-width:640px) {
-      #cal-modal { align-items:center; }
-      #cal-modal-sheet { height:auto; max-height:90dvh; border-radius:1.25rem; transform:translateY(16px) scale(0.97); opacity:0; transition:transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s; }
+      #cal-modal { align-items:center; padding:2.5rem; }
+      #cal-modal-sheet { height:auto; max-height:calc(100dvh - 5rem); max-width:640px; border-radius:1.25rem; transform:translateY(16px) scale(0.97); opacity:0; transition:transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s; }
       #cal-modal.is-open #cal-modal-sheet { transform:translateY(0) scale(1); opacity:1; }
+      #cal-iframe-mobile { min-height:680px; }
     }
   </style>
 </head>
@@ -1582,7 +1583,7 @@
         </div>
 
         <!-- Desktop: calendar with shimmer (hidden on mobile) -->
-        <div class="hidden lg:block w-full flex-shrink-0 lg:w-[460px] xl:w-[500px]">
+        <div class="hidden lg:block w-full flex-shrink-0 lg:w-[520px] xl:w-[580px]">
 
           <!-- Shimmer skeleton shown while GHL loads -->
           <div id="cal-shimmer" class="overflow-hidden rounded-2xl" style="min-height:640px; background:#141416; box-shadow:0 32px 80px -16px rgba(0,0,0,0.75), 0 0 0 1px rgba(201,168,76,0.12); padding:1.75rem 1.75rem 0;">
