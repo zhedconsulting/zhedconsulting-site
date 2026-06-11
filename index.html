@@ -582,11 +582,11 @@
     #cal-modal { position:fixed; inset:0; z-index:200; display:none; align-items:flex-end; justify-content:center; background:rgba(0,0,0,0.82); }
     #cal-modal.is-open { display:flex; }
     @supports (backdrop-filter:blur(6px)) { #cal-modal { backdrop-filter:blur(6px); background:rgba(0,0,0,0.72); } }
-    #cal-modal-sheet { position:relative; width:100%; max-width:480px; max-height:92dvh; border-radius:1.25rem 1.25rem 0 0; overflow:hidden; background:#fff; display:flex; flex-direction:column; transform:translateY(100%); transition:transform 0.35s cubic-bezier(0.4,0,0.2,1); }
+    #cal-modal-sheet { position:relative; width:100%; max-width:520px; max-height:92dvh; border-radius:1.25rem 1.25rem 0 0; overflow:hidden; background:#fff; display:flex; flex-direction:column; transform:translateY(100%); transition:transform 0.35s cubic-bezier(0.4,0,0.2,1); }
     #cal-modal.is-open #cal-modal-sheet { transform:translateY(0); }
     @media (min-width:640px) {
       #cal-modal { align-items:center; }
-      #cal-modal-sheet { border-radius:1.25rem; max-height:88dvh; transform:translateY(16px) scale(0.97); opacity:0; transition:transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s; }
+      #cal-modal-sheet { border-radius:1.25rem; max-height:90dvh; transform:translateY(16px) scale(0.97); opacity:0; transition:transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s; }
       #cal-modal.is-open #cal-modal-sheet { transform:translateY(0) scale(1); opacity:1; }
     }
   </style>
@@ -2011,28 +2011,39 @@
       }, 8000);
     })();
 
-    // ── Calendar modal (mobile) ────────────────────────────────────────
+    // ── Calendar modal (all devices) ─────────────────────────────────
     (function() {
       var modal = document.getElementById('cal-modal');
-      var openBtn = document.getElementById('open-cal-modal');
       var closeBtn = document.getElementById('close-cal-modal');
       var mobileIframe = document.getElementById('cal-iframe-mobile');
       var calUrl = 'https://link.zhedconsulting.com/widget/booking/10VqhYI2pwYT7PoP6vcn';
-      if (!modal || !openBtn) return;
+      if (!modal) return;
+
+      // Preload immediately so the calendar is already hydrated when the modal opens
+      mobileIframe.src = calUrl;
 
       function openModal() {
-        if (!mobileIframe.src) mobileIframe.src = calUrl;
         modal.classList.add('is-open');
         document.body.style.overflow = 'hidden';
-        closeBtn.focus();
+        if (closeBtn) closeBtn.focus();
       }
       function closeModal() {
         modal.classList.remove('is-open');
         document.body.style.overflow = '';
-        openBtn.focus();
       }
 
-      openBtn.addEventListener('click', openModal);
+      // Wire the dedicated mobile button
+      var openBtn = document.getElementById('open-cal-modal');
+      if (openBtn) openBtn.addEventListener('click', openModal);
+
+      // Wire every "Book a Strategy Call" / "#book" link across the whole site
+      document.querySelectorAll('a[href="#book"]').forEach(function(el) {
+        el.addEventListener('click', function(e) {
+          e.preventDefault();
+          openModal();
+        });
+      });
+
       closeBtn.addEventListener('click', closeModal);
       modal.addEventListener('click', function(e) {
         if (e.target === modal) closeModal();
