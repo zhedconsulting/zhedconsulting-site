@@ -565,6 +565,30 @@
     .footer-link { color: var(--text-muted); transition: color 0.2s ease; }
     .footer-link:hover { color: var(--accent); }
     .footer-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+    /* ── CALENDAR SHIMMER ─────────────────── */
+    @keyframes shimmer-sweep {
+      0%   { background-position: -500px 0; }
+      100% { background-position: 500px 0; }
+    }
+    .cal-shimmer-line {
+      background: linear-gradient(90deg, rgba(201,168,76,0.04) 25%, rgba(201,168,76,0.11) 50%, rgba(201,168,76,0.04) 75%);
+      background-size: 500px 100%;
+      animation: shimmer-sweep 1.8s infinite linear;
+      border-radius: 4px;
+    }
+
+    /* ── CALENDAR MODAL (mobile) ──────────── */
+    #cal-modal { position:fixed; inset:0; z-index:200; display:none; align-items:flex-end; justify-content:center; background:rgba(0,0,0,0.82); }
+    #cal-modal.is-open { display:flex; }
+    @supports (backdrop-filter:blur(6px)) { #cal-modal { backdrop-filter:blur(6px); background:rgba(0,0,0,0.72); } }
+    #cal-modal-sheet { position:relative; width:100%; max-width:480px; max-height:92dvh; border-radius:1.25rem 1.25rem 0 0; overflow:hidden; background:#fff; display:flex; flex-direction:column; transform:translateY(100%); transition:transform 0.35s cubic-bezier(0.4,0,0.2,1); }
+    #cal-modal.is-open #cal-modal-sheet { transform:translateY(0); }
+    @media (min-width:640px) {
+      #cal-modal { align-items:center; }
+      #cal-modal-sheet { border-radius:1.25rem; max-height:88dvh; transform:translateY(16px) scale(0.97); opacity:0; transition:transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s; }
+      #cal-modal.is-open #cal-modal-sheet { transform:translateY(0) scale(1); opacity:1; }
+    }
   </style>
 </head>
 <body class="antialiased">
@@ -1546,19 +1570,54 @@
           </div>
         </div>
 
-        <!-- Right: calendar -->
-        <div class="w-full flex-shrink-0 lg:w-[460px] xl:w-[500px]">
-          <div class="overflow-hidden rounded-2xl" style="box-shadow:0 32px 80px -16px rgba(0,0,0,0.75), 0 0 0 1px rgba(201,168,76,0.12);">
+        <!-- Mobile: book button (lg+ hides this) -->
+        <div class="lg:hidden -mt-4">
+          <button id="open-cal-modal" aria-haspopup="dialog"
+            class="inline-flex w-full items-center justify-center gap-3 rounded-lg px-7 py-4 font-body text-sm font-semibold tracking-[0.04em] active:scale-[0.97]"
+            style="background:var(--accent); color:#0c0c0e; box-shadow:0 0 0 1px rgba(201,168,76,0.4), 0 8px 32px -4px rgba(201,168,76,0.35); transition:transform 0.15s, box-shadow 0.15s;">
+            Book a Strategy Call
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <p class="mt-3 text-center font-body text-[0.75rem] text-[var(--text-muted)] opacity-40">No commitment. If we're not a fit, I'll tell you.</p>
+        </div>
+
+        <!-- Desktop: calendar with shimmer (hidden on mobile) -->
+        <div class="hidden lg:block w-full flex-shrink-0 lg:w-[460px] xl:w-[500px]">
+
+          <!-- Shimmer skeleton shown while GHL loads -->
+          <div id="cal-shimmer" class="overflow-hidden rounded-2xl" style="min-height:640px; background:#141416; box-shadow:0 32px 80px -16px rgba(0,0,0,0.75), 0 0 0 1px rgba(201,168,76,0.12); padding:1.75rem 1.75rem 0;">
+            <div class="cal-shimmer-line mb-3" style="height:1.1rem; width:58%;"></div>
+            <div class="cal-shimmer-line mb-5" style="height:0.8rem; width:38%;"></div>
+            <div class="cal-shimmer-line mb-6" style="height:0.8rem; width:42%;"></div>
+            <div class="cal-shimmer-line mb-5" style="height:2rem; width:100%;"></div>
+            <div class="flex gap-2 mb-2">
+              <div class="cal-shimmer-line" style="flex:1;height:2.25rem;"></div><div class="cal-shimmer-line" style="flex:1;height:2.25rem;"></div><div class="cal-shimmer-line" style="flex:1;height:2.25rem;"></div><div class="cal-shimmer-line" style="flex:1;height:2.25rem;"></div><div class="cal-shimmer-line" style="flex:1;height:2.25rem;"></div><div class="cal-shimmer-line" style="flex:1;height:2.25rem;"></div><div class="cal-shimmer-line" style="flex:1;height:2.25rem;"></div>
+            </div>
+            <div class="flex gap-2 mb-2">
+              <div class="cal-shimmer-line" style="flex:1;height:2.25rem;"></div><div class="cal-shimmer-line" style="flex:1;height:2.25rem;"></div><div class="cal-shimmer-line" style="flex:1;height:2.25rem;"></div><div class="cal-shimmer-line" style="flex:1;height:2.25rem;"></div><div class="cal-shimmer-line" style="flex:1;height:2.25rem;"></div><div class="cal-shimmer-line" style="flex:1;height:2.25rem;"></div><div class="cal-shimmer-line" style="flex:1;height:2.25rem;"></div>
+            </div>
+            <div class="flex gap-2 mb-2">
+              <div class="cal-shimmer-line" style="flex:1;height:2.25rem;"></div><div class="cal-shimmer-line" style="flex:1;height:2.25rem;"></div><div class="cal-shimmer-line" style="flex:1;height:2.25rem;"></div><div class="cal-shimmer-line" style="flex:1;height:2.25rem;"></div><div class="cal-shimmer-line" style="flex:1;height:2.25rem;"></div><div class="cal-shimmer-line" style="flex:1;height:2.25rem;"></div><div class="cal-shimmer-line" style="flex:1;height:2.25rem;"></div>
+            </div>
+            <div class="flex gap-2 mb-6">
+              <div class="cal-shimmer-line" style="flex:1;height:2.25rem;"></div><div class="cal-shimmer-line" style="flex:1;height:2.25rem;"></div><div class="cal-shimmer-line" style="flex:1;height:2.25rem;"></div><div class="cal-shimmer-line" style="flex:1;height:2.25rem;"></div><div class="cal-shimmer-line" style="flex:1;height:2.25rem;"></div><div class="cal-shimmer-line" style="flex:1;height:2.25rem;"></div><div class="cal-shimmer-line" style="flex:1;height:2.25rem;"></div>
+            </div>
+            <div class="cal-shimmer-line mb-3" style="height:0.8rem; width:30%;"></div>
+            <div class="cal-shimmer-line" style="height:2.5rem; width:100%;"></div>
+          </div>
+
+          <!-- Real calendar — rendered on top once loaded -->
+          <div id="cal-wrap" class="overflow-hidden rounded-2xl" style="display:none; box-shadow:0 32px 80px -16px rgba(0,0,0,0.75), 0 0 0 1px rgba(201,168,76,0.12);">
             <iframe
-              src="https://link.zhedconsulting.com/widget/booking/10VqhYI2pwYT7PoP6vcn"
-              style="width:100%;min-height:680px;border:none;display:block;"
               id="10VqhYI2pwYT7PoP6vcn_1781150811121"
+              src="https://link.zhedconsulting.com/widget/booking/10VqhYI2pwYT7PoP6vcn"
+              style="width:100%;min-height:640px;border:none;display:block;"
               scrolling="no"
               title="Book a Strategy Call — Zhed Consulting"
-              loading="lazy"
             ></iframe>
           </div>
-          <p class="mt-4 text-center font-body text-[0.75rem] text-[var(--text-muted)] opacity-40">
+
+          <p id="cal-caption" class="mt-4 text-center font-body text-[0.75rem] text-[var(--text-muted)] opacity-40" style="display:none;">
             No commitment. If we're not a fit, I'll tell you.
           </p>
         </div>
@@ -1566,6 +1625,24 @@
       </div>
     </div>
   </section>
+
+  <!-- ════════════════════════════════════════
+       CALENDAR MODAL (mobile)
+  ════════════════════════════════════════ -->
+  <div id="cal-modal" role="dialog" aria-modal="true" aria-label="Book a Strategy Call">
+    <div id="cal-modal-sheet">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:0.875rem 1.125rem 0.75rem;border-bottom:1px solid rgba(0,0,0,0.08);flex-shrink:0;">
+        <span style="font-family:'DM Sans',system-ui,sans-serif;font-size:0.875rem;font-weight:600;color:#1a1a1a;letter-spacing:0.01em;">Book a Strategy Call</span>
+        <button id="close-cal-modal" aria-label="Close"
+          style="width:1.875rem;height:1.875rem;border-radius:50%;border:none;background:rgba(0,0,0,0.07);display:flex;align-items:center;justify-content:center;cursor:pointer;color:#555;flex-shrink:0;">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <iframe id="cal-iframe-mobile" src="" scrolling="yes"
+        style="width:100%;flex:1;min-height:580px;border:none;display:block;"
+        title="Book a Strategy Call — Zhed Consulting"></iframe>
+    </div>
+  </div>
 
   <!-- ════════════════════════════════════════
        FOOTER
@@ -1907,5 +1984,63 @@
   </script>
 
   <script src="https://link.zhedconsulting.com/js/form_embed.js"></script>
+
+  <script>
+    // ── Calendar shimmer → reveal on load ─────────────────────────────
+    (function() {
+      var iframe = document.getElementById('10VqhYI2pwYT7PoP6vcn_1781150811121');
+      var shimmer = document.getElementById('cal-shimmer');
+      var wrap = document.getElementById('cal-wrap');
+      var caption = document.getElementById('cal-caption');
+      if (!iframe) return;
+      function revealCalendar() {
+        shimmer.style.transition = 'opacity 0.5s ease';
+        shimmer.style.opacity = '0';
+        setTimeout(function() {
+          shimmer.style.display = 'none';
+          wrap.style.display = 'block';
+          if (caption) caption.style.display = 'block';
+        }, 500);
+      }
+      iframe.addEventListener('load', function() {
+        setTimeout(revealCalendar, 1100);
+      });
+      // Fallback: reveal after 8s regardless
+      setTimeout(function() {
+        if (shimmer.style.display !== 'none') revealCalendar();
+      }, 8000);
+    })();
+
+    // ── Calendar modal (mobile) ────────────────────────────────────────
+    (function() {
+      var modal = document.getElementById('cal-modal');
+      var openBtn = document.getElementById('open-cal-modal');
+      var closeBtn = document.getElementById('close-cal-modal');
+      var mobileIframe = document.getElementById('cal-iframe-mobile');
+      var calUrl = 'https://link.zhedconsulting.com/widget/booking/10VqhYI2pwYT7PoP6vcn';
+      if (!modal || !openBtn) return;
+
+      function openModal() {
+        if (!mobileIframe.src) mobileIframe.src = calUrl;
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        closeBtn.focus();
+      }
+      function closeModal() {
+        modal.classList.remove('is-open');
+        document.body.style.overflow = '';
+        openBtn.focus();
+      }
+
+      openBtn.addEventListener('click', openModal);
+      closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) closeModal();
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+      });
+    })();
+  </script>
 </body>
 </html>
