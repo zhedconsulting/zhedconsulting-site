@@ -336,14 +336,29 @@
     .calc-tab-btn.active { color: var(--accent); border-color: rgba(201,168,76,0.32); background: rgba(201,168,76,0.07); }
     .calc-tab-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
     .calc-input-wrap label { display: block; font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem; }
-    .calc-input {
-      width: 100%; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 6px; color: var(--text); font-family: "DM Sans", system-ui, sans-serif;
-      font-size: 1.125rem; font-weight: 500; padding: 0.8125rem 1rem;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    .calc-slider {
+      -webkit-appearance: none; appearance: none;
+      width: 100%; height: 4px; border-radius: 4px; outline: none; cursor: pointer;
+      background: linear-gradient(to right, var(--accent) 0%, var(--accent) var(--pct, 30%), rgba(255,255,255,0.1) var(--pct, 30%), rgba(255,255,255,0.1) 100%);
+      transition: opacity 0.2s ease;
     }
-    .calc-input::placeholder { color: rgba(155,155,163,0.38); }
-    .calc-input:focus { border-color: rgba(201,168,76,0.5); box-shadow: 0 0 0 3px rgba(201,168,76,0.08); outline: none; }
+    .calc-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 20px; height: 20px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.2), 0 2px 8px rgba(0,0,0,0.4);
+      transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s ease;
+      cursor: grab;
+    }
+    .calc-slider::-webkit-slider-thumb:active { cursor: grabbing; transform: scale(1.2); box-shadow: 0 0 0 5px rgba(201,168,76,0.25), 0 2px 12px rgba(0,0,0,0.5); }
+    .calc-slider::-moz-range-thumb {
+      width: 20px; height: 20px; border-radius: 50%; border: none;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.2), 0 2px 8px rgba(0,0,0,0.4);
+      cursor: grab;
+    }
+    .calc-slider:focus-visible { outline: 2px solid var(--accent-bright); outline-offset: 4px; }
+    .calc-val { font-family: "Instrument Serif", Georgia, serif; font-size: 1.75rem; letter-spacing: -0.04em; line-height: 1; color: var(--text); }
     .calc-result-card { background: rgba(255,255,255,0.022); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 1.25rem 1.375rem; }
     .calc-result-card.gold { background: rgba(201,168,76,0.06); border-color: rgba(201,168,76,0.28); box-shadow: 0 0 0 1px rgba(201,168,76,0.1), 0 4px 20px -4px rgba(201,168,76,0.12); }
     .calc-result-value { font-family: "Instrument Serif", Georgia, serif; letter-spacing: -0.04em; line-height: 1; color: var(--accent); }
@@ -833,29 +848,38 @@
         <div class="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-14">
 
           <!-- Inputs -->
-          <div class="flex flex-col gap-5 lg:w-[40%] lg:flex-shrink-0">
+          <div class="flex flex-col gap-7 lg:w-[40%] lg:flex-shrink-0">
             <div class="calc-input-wrap">
-              <label for="calc-spend">Monthly Ad Spend</label>
-              <div class="relative">
-                <span class="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 font-body text-base text-[var(--text-muted)] opacity-45">$</span>
-                <input type="number" id="calc-spend" class="calc-input pl-7" placeholder="2000" min="0" max="100000" value="2000" oninput="calcUpdate()">
+              <div class="mb-3 flex items-end justify-between">
+                <label for="calc-spend">Monthly Ad Spend</label>
+                <span id="calc-spend-val" class="calc-val">$2,000</span>
+              </div>
+              <input type="range" id="calc-spend" class="calc-slider" min="500" max="10000" step="250" value="2000" oninput="calcUpdate()">
+              <div class="mt-1.5 flex justify-between font-body text-[0.625rem] text-[var(--text-muted)] opacity-35">
+                <span>$500</span><span>$10K</span>
               </div>
             </div>
             <div class="calc-input-wrap">
-              <label for="calc-ticket">Average Job Value</label>
-              <div class="relative">
-                <span class="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 font-body text-base text-[var(--text-muted)] opacity-45">$</span>
-                <input type="number" id="calc-ticket" class="calc-input pl-7" placeholder="3500" min="0" max="500000" value="3500" oninput="calcUpdate()">
+              <div class="mb-3 flex items-end justify-between">
+                <label for="calc-ticket">Average Job Value</label>
+                <span id="calc-ticket-val" class="calc-val">$3,500</span>
+              </div>
+              <input type="range" id="calc-ticket" class="calc-slider" min="500" max="20000" step="500" value="3500" oninput="calcUpdate()">
+              <div class="mt-1.5 flex justify-between font-body text-[0.625rem] text-[var(--text-muted)] opacity-35">
+                <span>$500</span><span>$20K</span>
               </div>
             </div>
             <div class="calc-input-wrap">
-              <label for="calc-close">Your Close Rate</label>
-              <div class="relative">
-                <input type="number" id="calc-close" class="calc-input pr-8" placeholder="35" min="1" max="100" value="35" oninput="calcUpdate()">
-                <span class="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 font-body text-base text-[var(--text-muted)] opacity-45">%</span>
+              <div class="mb-3 flex items-end justify-between">
+                <label for="calc-close">Your Close Rate</label>
+                <span id="calc-close-val" class="calc-val">35%</span>
+              </div>
+              <input type="range" id="calc-close" class="calc-slider" min="10" max="80" step="5" value="35" oninput="calcUpdate()">
+              <div class="mt-1.5 flex justify-between font-body text-[0.625rem] text-[var(--text-muted)] opacity-35">
+                <span>10%</span><span>80%</span>
               </div>
             </div>
-            <p class="text-[0.7rem] leading-[1.6] text-[var(--text-muted)] opacity-45">Uses $10 avg. cost per lead and 20% lead-to-appointment rate, based on Meta home service benchmarks.</p>
+            <p class="text-[0.7rem] leading-[1.6] text-[var(--text-muted)] opacity-40">Uses $10 avg. cost per lead and 20% lead-to-appointment rate, based on Meta home service benchmarks.</p>
           </div>
 
           <!-- Results -->
@@ -1474,23 +1498,49 @@
       return '$' + n.toLocaleString();
     }
 
+    function calcSliderPct(el) {
+      var pct = ((el.value - el.min) / (el.max - el.min) * 100).toFixed(1) + '%';
+      el.style.setProperty('--pct', pct);
+    }
+
     function calcUpdate() {
-      var spend    = parseFloat(document.getElementById('calc-spend').value)  || 0;
-      var ticket   = parseFloat(document.getElementById('calc-ticket').value) || 0;
-      var closePct = parseFloat(document.getElementById('calc-close').value)  || 0;
-      var leads    = Math.round(spend / 10);
-      var booked   = Math.round(leads * 0.20);
-      var jobs     = Math.round(booked * (closePct / 100));
-      var revenue  = jobs * ticket;
-      var cpa      = booked > 0 ? Math.round(spend / booked) : 0;
-      document.getElementById('res-leads').textContent        = leads.toLocaleString();
-      document.getElementById('res-appts').textContent        = booked.toLocaleString();
-      document.getElementById('res-cpa').textContent          = cpa > 0 ? '$' + cpa.toLocaleString() : '—';
-      document.getElementById('res-revenue').textContent      = fmtCurrency(revenue);
-      document.getElementById('res-spend-label').textContent  = '$' + spend.toLocaleString();
-      document.getElementById('res-jobs').textContent         = jobs.toLocaleString() + (jobs === 1 ? ' job' : ' jobs');
+      var spendEl  = document.getElementById('calc-spend');
+      var ticketEl = document.getElementById('calc-ticket');
+      var closeEl  = document.getElementById('calc-close');
+      var spend    = parseFloat(spendEl.value)  || 0;
+      var ticket   = parseFloat(ticketEl.value) || 0;
+      var closePct = parseFloat(closeEl.value)  || 0;
+
+      calcSliderPct(spendEl);
+      calcSliderPct(ticketEl);
+      calcSliderPct(closeEl);
+
+      document.getElementById('calc-spend-val').textContent  = '$' + spend.toLocaleString();
+      document.getElementById('calc-ticket-val').textContent = '$' + ticket.toLocaleString();
+      document.getElementById('calc-close-val').textContent  = closePct + '%';
+
+      var leads   = Math.round(spend / 10);
+      var booked  = Math.round(leads * 0.20);
+      var jobs    = Math.round(booked * (closePct / 100));
+      var revenue = jobs * ticket;
+      var cpa     = booked > 0 ? Math.round(spend / booked) : 0;
+
+      document.getElementById('res-leads').textContent          = leads.toLocaleString();
+      document.getElementById('res-appts').textContent          = booked.toLocaleString();
+      document.getElementById('res-cpa').textContent            = cpa > 0 ? '$' + cpa.toLocaleString() : '—';
+      document.getElementById('res-revenue').textContent        = fmtCurrency(revenue);
+      document.getElementById('res-spend-label').textContent    = '$' + spend.toLocaleString();
+      document.getElementById('res-jobs').textContent           = jobs.toLocaleString() + (jobs === 1 ? ' job' : ' jobs');
       document.getElementById('res-revenue-inline').textContent = fmtCurrency(revenue);
     }
+
+    // Init slider fills on load
+    document.addEventListener('DOMContentLoaded', function() {
+      ['calc-spend','calc-ticket','calc-close'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) calcSliderPct(el);
+      });
+    });
 
     // ── TAB SWITCHER ─────────────────────────────────────────
     function switchCalcTab(tab) {
