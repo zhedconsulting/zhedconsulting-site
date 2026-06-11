@@ -316,6 +316,52 @@
       pointer-events:none;
     }
 
+    /* ── CALCULATOR / AUDIT ──────────────── */
+    .calc-bg {
+      background-color: var(--bg-elevated);
+      background-image:
+        radial-gradient(ellipse 70% 55% at 50% 0%, rgba(201,168,76,0.065) 0%, transparent 58%),
+        radial-gradient(ellipse 50% 45% at 5% 100%, rgba(255,255,255,0.025) 0%, transparent 52%),
+        radial-gradient(ellipse 40% 35% at 95% 60%, rgba(201,168,76,0.04) 0%, transparent 50%);
+    }
+    .calc-tab-btn {
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-size: 0.875rem; font-weight: 500; letter-spacing: 0.04em;
+      padding: 0.6875rem 1.375rem; border-radius: 6px;
+      border: 1px solid transparent; color: var(--text-muted);
+      background: transparent; cursor: pointer;
+      transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+    }
+    .calc-tab-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.1); }
+    .calc-tab-btn.active { color: var(--accent); border-color: rgba(201,168,76,0.32); background: rgba(201,168,76,0.07); }
+    .calc-tab-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .calc-input-wrap label { display: block; font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem; }
+    .calc-input {
+      width: 100%; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px; color: var(--text); font-family: "DM Sans", system-ui, sans-serif;
+      font-size: 1.125rem; font-weight: 500; padding: 0.8125rem 1rem;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .calc-input::placeholder { color: rgba(155,155,163,0.38); }
+    .calc-input:focus { border-color: rgba(201,168,76,0.5); box-shadow: 0 0 0 3px rgba(201,168,76,0.08); outline: none; }
+    .calc-result-card { background: rgba(255,255,255,0.022); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 1.25rem 1.375rem; }
+    .calc-result-card.gold { background: rgba(201,168,76,0.06); border-color: rgba(201,168,76,0.28); box-shadow: 0 0 0 1px rgba(201,168,76,0.1), 0 4px 20px -4px rgba(201,168,76,0.12); }
+    .calc-result-value { font-family: "Instrument Serif", Georgia, serif; letter-spacing: -0.04em; line-height: 1; color: var(--accent); }
+    .quiz-option-btn {
+      width: 100%; text-align: left; padding: 0.875rem 1.125rem;
+      background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 6px; color: var(--text-muted);
+      font-family: "DM Sans", system-ui, sans-serif; font-size: 0.9375rem; cursor: pointer;
+      transition: transform 0.28s cubic-bezier(0.34,1.4,0.64,1), border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+    }
+    .quiz-option-btn:hover { border-color: rgba(201,168,76,0.3); color: var(--text); background: rgba(201,168,76,0.04); transform: translateX(3px); }
+    .quiz-option-btn.selected { border-color: rgba(201,168,76,0.5); color: var(--accent); background: rgba(201,168,76,0.08); transform: translateX(3px); }
+    .quiz-option-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .quiz-progress-bar { height: 2px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
+    .quiz-progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-bright)); border-radius: 2px; transition: width 0.4s cubic-bezier(0.4,0,0.2,1); }
+    .audit-diag-card { background: rgba(255,255,255,0.022); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 1.25rem 1.375rem; }
+    .audit-diag-card.gold-card { background: rgba(201,168,76,0.05); border-color: rgba(201,168,76,0.25); }
+
     /* ── FOOTER ──────────────────────────── */
     .footer-link { color: var(--text-muted); transition: color 0.2s ease; }
     .footer-link:hover { color: var(--accent); }
@@ -761,6 +807,243 @@
   </section>
 
   <!-- ════════════════════════════════════════
+       ROI CALCULATOR / FREE AUDIT
+  ════════════════════════════════════════ -->
+  <section id="tools" class="calc-bg relative overflow-hidden" aria-labelledby="tools-heading">
+    <div class="section-divider absolute inset-x-0 top-0 h-px" aria-hidden="true"></div>
+
+    <div class="relative z-10 mx-auto w-full max-w-6xl px-5 py-24 sm:px-8 sm:py-32 lg:px-12 lg:py-36">
+
+      <p class="section-overline font-body mb-7 text-[0.6875rem] font-medium uppercase tracking-[0.18em] sm:mb-8 sm:text-xs">Free Tools</p>
+      <h2 id="tools-heading" class="section-heading mb-4 max-w-3xl text-[2rem] font-normal text-[var(--text)] sm:text-[2.75rem] md:text-[3.25rem] lg:text-[3.5rem]">
+        Run your numbers.<br>See what's possible.
+      </h2>
+      <p class="mb-12 max-w-xl text-[0.9375rem] leading-[1.7] text-[var(--text-muted)] sm:mb-14 sm:text-base">
+        Plug in your spend and ticket size — or audit your current lead pipeline for free. No email required for the calculator.
+      </p>
+
+      <!-- Tab nav -->
+      <div class="mb-10 flex gap-2 sm:mb-12" role="tablist" aria-label="Free tools">
+        <button class="calc-tab-btn active" role="tab" aria-selected="true" aria-controls="panel-calculator" id="tab-calc-btn" onclick="switchCalcTab('calculator')">ROI Calculator</button>
+        <button class="calc-tab-btn" role="tab" aria-selected="false" aria-controls="panel-audit" id="tab-audit-btn" onclick="switchCalcTab('audit')">Free Lead Audit</button>
+      </div>
+
+      <!-- ─── ROI CALCULATOR ─── -->
+      <div id="panel-calculator" role="tabpanel">
+        <div class="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-14">
+
+          <!-- Inputs -->
+          <div class="flex flex-col gap-5 lg:w-[40%] lg:flex-shrink-0">
+            <div class="calc-input-wrap">
+              <label for="calc-spend">Monthly Ad Spend</label>
+              <div class="relative">
+                <span class="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 font-body text-base text-[var(--text-muted)] opacity-45">$</span>
+                <input type="number" id="calc-spend" class="calc-input pl-7" placeholder="2000" min="0" max="100000" value="2000" oninput="calcUpdate()">
+              </div>
+            </div>
+            <div class="calc-input-wrap">
+              <label for="calc-ticket">Average Job Value</label>
+              <div class="relative">
+                <span class="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 font-body text-base text-[var(--text-muted)] opacity-45">$</span>
+                <input type="number" id="calc-ticket" class="calc-input pl-7" placeholder="3500" min="0" max="500000" value="3500" oninput="calcUpdate()">
+              </div>
+            </div>
+            <div class="calc-input-wrap">
+              <label for="calc-close">Your Close Rate</label>
+              <div class="relative">
+                <input type="number" id="calc-close" class="calc-input pr-8" placeholder="35" min="1" max="100" value="35" oninput="calcUpdate()">
+                <span class="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 font-body text-base text-[var(--text-muted)] opacity-45">%</span>
+              </div>
+            </div>
+            <p class="text-[0.7rem] leading-[1.6] text-[var(--text-muted)] opacity-45">Uses $10 avg. cost per lead and 20% lead-to-appointment rate, based on Meta home service benchmarks.</p>
+          </div>
+
+          <!-- Results -->
+          <div class="flex flex-1 flex-col gap-4">
+            <div class="grid grid-cols-2 gap-3 sm:gap-4">
+              <div class="calc-result-card">
+                <p class="mb-2.5 font-body text-[0.625rem] font-medium uppercase tracking-[0.12em] text-[var(--text-muted)] opacity-55">Est. Leads / Mo</p>
+                <p id="res-leads" class="calc-result-value text-[2rem] sm:text-[2.5rem]">200</p>
+              </div>
+              <div class="calc-result-card">
+                <p class="mb-2.5 font-body text-[0.625rem] font-medium uppercase tracking-[0.12em] text-[var(--text-muted)] opacity-55">Est. Booked Appts</p>
+                <p id="res-appts" class="calc-result-value text-[2rem] sm:text-[2.5rem]">40</p>
+              </div>
+              <div class="calc-result-card">
+                <p class="mb-2.5 font-body text-[0.625rem] font-medium uppercase tracking-[0.12em] text-[var(--text-muted)] opacity-55">Cost / Booked Appt</p>
+                <p id="res-cpa" class="calc-result-value text-[2rem] sm:text-[2.5rem]">$50</p>
+              </div>
+              <div class="calc-result-card gold">
+                <p class="mb-2.5 font-body text-[0.625rem] font-medium uppercase tracking-[0.12em] text-[var(--accent)] opacity-65">Projected Revenue</p>
+                <p id="res-revenue" class="calc-result-value text-[2rem] sm:text-[2.5rem]">$49K</p>
+              </div>
+            </div>
+
+            <div class="rounded-lg p-4 sm:p-5" style="background:rgba(201,168,76,0.04); border:1px solid rgba(201,168,76,0.13);">
+              <p class="font-body text-sm leading-[1.7] text-[var(--text-muted)]">
+                At <span id="res-spend-label" class="text-[var(--text)]">$2,000</span>/mo in ad spend, you could close an estimated
+                <span id="res-jobs" class="font-semibold text-[var(--accent)]">14 jobs</span> — generating
+                <span id="res-revenue-inline" class="font-semibold text-[var(--accent)]">$49,000</span> at your ticket size.
+                The management fee covers itself on the first close.
+              </p>
+            </div>
+
+            <a href="#book" class="btn-primary mt-1 inline-flex w-full items-center justify-center gap-2 rounded-md px-6 py-3.5 font-body text-sm font-semibold tracking-wide sm:w-auto">
+              Book a Strategy Call
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+
+        </div>
+      </div><!-- /panel-calculator -->
+
+      <!-- ─── FREE LEAD AUDIT ─── -->
+      <div id="panel-audit" role="tabpanel" hidden>
+        <div class="mx-auto max-w-xl">
+
+          <!-- Progress -->
+          <div class="mb-9">
+            <div class="mb-3 flex items-center justify-between">
+              <p id="audit-step-label" class="font-body text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-[var(--text-muted)] opacity-55">Step 1 of 5</p>
+              <p id="audit-pct-label" class="font-body text-[0.6875rem] font-medium text-[var(--accent)] opacity-70">0%</p>
+            </div>
+            <div class="quiz-progress-bar">
+              <div id="audit-progress" class="quiz-progress-fill" style="width:0%"></div>
+            </div>
+          </div>
+
+          <!-- Steps -->
+          <div id="audit-steps">
+
+            <!-- Step 1 -->
+            <div class="audit-step" data-step="1">
+              <p class="mb-7 text-[1.375rem] leading-[1.2] text-[var(--text)] sm:text-[1.625rem]" style="font-family:'Instrument Serif',Georgia,serif;letter-spacing:-0.02em;">What's your primary trade?</p>
+              <div class="flex flex-col gap-2.5">
+                <button class="quiz-option-btn" onclick="auditSelect(this,1,'epoxy')">Epoxy Flooring / Concrete Coatings</button>
+                <button class="quiz-option-btn" onclick="auditSelect(this,1,'hvac')">HVAC</button>
+                <button class="quiz-option-btn" onclick="auditSelect(this,1,'plumbing')">Plumbing</button>
+                <button class="quiz-option-btn" onclick="auditSelect(this,1,'electrical')">Electrical</button>
+                <button class="quiz-option-btn" onclick="auditSelect(this,1,'roofing')">Roofing</button>
+                <button class="quiz-option-btn" onclick="auditSelect(this,1,'other')">Foundation / Spray Foam / Mold / Other</button>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="audit-step hidden" data-step="2">
+              <p class="mb-7 text-[1.375rem] leading-[1.2] text-[var(--text)] sm:text-[1.625rem]" style="font-family:'Instrument Serif',Georgia,serif;letter-spacing:-0.02em;">Monthly revenue right now?</p>
+              <div class="flex flex-col gap-2.5">
+                <button class="quiz-option-btn" onclick="auditSelect(this,2,15000)">Under $30K/mo</button>
+                <button class="quiz-option-btn" onclick="auditSelect(this,2,52500)">$30K – $75K/mo</button>
+                <button class="quiz-option-btn" onclick="auditSelect(this,2,112500)">$75K – $150K/mo</button>
+                <button class="quiz-option-btn" onclick="auditSelect(this,2,225000)">$150K – $300K/mo</button>
+                <button class="quiz-option-btn" onclick="auditSelect(this,2,400000)">$300K+/mo</button>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="audit-step hidden" data-step="3">
+              <p class="mb-7 text-[1.375rem] leading-[1.2] text-[var(--text)] sm:text-[1.625rem]" style="font-family:'Instrument Serif',Georgia,serif;letter-spacing:-0.02em;">Current monthly ad spend?</p>
+              <div class="flex flex-col gap-2.5">
+                <button class="quiz-option-btn" onclick="auditSelect(this,3,0)">$0 — Not running ads</button>
+                <button class="quiz-option-btn" onclick="auditSelect(this,3,750)">Under $1,000</button>
+                <button class="quiz-option-btn" onclick="auditSelect(this,3,2000)">$1,000 – $3,000</button>
+                <button class="quiz-option-btn" onclick="auditSelect(this,3,4000)">$3,000 – $5,000</button>
+                <button class="quiz-option-btn" onclick="auditSelect(this,3,7500)">$5,000+</button>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="audit-step hidden" data-step="4">
+              <p class="mb-1.5 text-[1.375rem] leading-[1.2] text-[var(--text)] sm:text-[1.625rem]" style="font-family:'Instrument Serif',Georgia,serif;letter-spacing:-0.02em;">How many leads per month?</p>
+              <p class="mb-7 text-sm text-[var(--text-muted)] opacity-65">Form fills, DMs, inbound calls — all of it.</p>
+              <div class="flex flex-col gap-2.5">
+                <button class="quiz-option-btn" onclick="auditSelect(this,4,5)">0 – 10 leads</button>
+                <button class="quiz-option-btn" onclick="auditSelect(this,4,20)">10 – 30 leads</button>
+                <button class="quiz-option-btn" onclick="auditSelect(this,4,45)">30 – 60 leads</button>
+                <button class="quiz-option-btn" onclick="auditSelect(this,4,75)">60+ leads</button>
+              </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="audit-step hidden" data-step="5">
+              <p class="mb-1.5 text-[1.375rem] leading-[1.2] text-[var(--text)] sm:text-[1.625rem]" style="font-family:'Instrument Serif',Georgia,serif;letter-spacing:-0.02em;">How many actually book a call or on-site?</p>
+              <p class="mb-7 text-sm text-[var(--text-muted)] opacity-65">Be honest — this is where the money leaks.</p>
+              <div class="flex flex-col gap-2.5">
+                <button class="quiz-option-btn" onclick="auditSelect(this,5,1)">0 – 2</button>
+                <button class="quiz-option-btn" onclick="auditSelect(this,5,5)">3 – 8</button>
+                <button class="quiz-option-btn" onclick="auditSelect(this,5,14)">8 – 20</button>
+                <button class="quiz-option-btn" onclick="auditSelect(this,5,25)">20+</button>
+              </div>
+            </div>
+
+            <!-- Step 6: Results / Diagnosis -->
+            <div class="audit-step hidden" data-step="6">
+              <p class="mb-1.5 font-body text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-[var(--accent)] opacity-75">Your Audit</p>
+              <p id="audit-result-headline" class="mb-8 text-[1.375rem] leading-[1.15] text-[var(--text)] sm:text-[1.625rem]" style="font-family:'Instrument Serif',Georgia,serif;letter-spacing:-0.02em;"></p>
+              <div id="audit-diag-cards" class="mb-7 flex flex-col gap-3"></div>
+              <div class="mb-7 rounded-lg p-5" style="background:rgba(201,168,76,0.04);border:1px solid rgba(201,168,76,0.14);">
+                <p id="audit-opportunity" class="font-body text-sm leading-[1.75] text-[var(--text-muted)]"></p>
+              </div>
+              <p class="mb-5 font-body text-sm leading-[1.65] text-[var(--text-muted)] opacity-70">Get your full audit report — what's wrong, what to fix, and what it's worth to you monthly.</p>
+              <button class="btn-primary inline-flex w-full items-center justify-center gap-2 rounded-md px-6 py-3.5 font-body text-sm font-semibold tracking-wide" onclick="auditShowCapture()">
+                Send Me the Audit Report
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+
+            <!-- Step 7: Lead capture -->
+            <div class="audit-step hidden" data-step="7">
+              <p class="mb-1.5 text-[1.375rem] leading-[1.2] text-[var(--text)] sm:text-[1.625rem]" style="font-family:'Instrument Serif',Georgia,serif;letter-spacing:-0.02em;">Where should we send it?</p>
+              <p class="mb-8 text-sm leading-[1.65] text-[var(--text-muted)] opacity-75">Your personalized breakdown — specific to your trade and numbers — within 24 hours.</p>
+              <!-- Replace data-ghl-action value with your GHL form URL when ready -->
+              <form id="audit-form" class="flex flex-col gap-4" onsubmit="auditSubmit(event)" data-ghl-action="REPLACE_WITH_GHL_FORM_URL">
+                <input type="text"  name="name"  placeholder="Your Name"     required class="form-field w-full px-4 py-3.5 font-body text-base">
+                <input type="email" name="email" placeholder="Email Address"  required class="form-field w-full px-4 py-3.5 font-body text-base">
+                <input type="tel"   name="phone" placeholder="Phone Number"   required class="form-field w-full px-4 py-3.5 font-body text-base">
+                <input type="hidden" name="audit_trade"    id="h-trade">
+                <input type="hidden" name="audit_revenue"  id="h-revenue">
+                <input type="hidden" name="audit_spend"    id="h-spend">
+                <input type="hidden" name="audit_leads"    id="h-leads">
+                <input type="hidden" name="audit_bookings" id="h-bookings">
+                <button type="submit" class="btn-primary mt-1 inline-flex w-full items-center justify-center gap-2 rounded-md px-6 py-3.5 font-body text-sm font-semibold tracking-wide">
+                  Send Me the Audit
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+              </form>
+              <p class="mt-4 text-center font-body text-xs text-[var(--text-muted)] opacity-40">No spam. Just your audit. You can book a call directly if you'd rather talk.</p>
+            </div>
+
+            <!-- Step 8: Success -->
+            <div class="audit-step hidden" data-step="8">
+              <div class="py-10 text-center">
+                <div class="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full" style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.28);">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M4 11l5 5L18 6" stroke="#c9a84c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <p class="mb-3 text-[1.5rem] text-[var(--text)]" style="font-family:'Instrument Serif',Georgia,serif;letter-spacing:-0.02em;">You're all set.</p>
+                <p class="mx-auto max-w-sm text-sm leading-[1.7] text-[var(--text-muted)] opacity-70">Expect your audit within 24 hours. If you want to talk through it sooner, book a call below.</p>
+                <a href="#book" class="btn-primary mt-8 inline-flex items-center justify-center gap-2 rounded-md px-7 py-3.5 font-body text-sm font-semibold tracking-wide">
+                  Book a Strategy Call
+                </a>
+              </div>
+            </div>
+
+          </div><!-- /audit-steps -->
+
+          <!-- Back button -->
+          <div id="audit-nav" class="mt-8">
+            <button id="audit-back-btn" class="btn-secondary inline-flex items-center gap-2 rounded-md px-5 py-3 font-body text-sm font-semibold tracking-wide" style="opacity:0;pointer-events:none;" onclick="auditBack()">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M12 7H2M7 12l-5-5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Back
+            </button>
+          </div>
+
+        </div>
+      </div><!-- /panel-audit -->
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
        ORIGIN / ABOUT
   ════════════════════════════════════════ -->
   <section id="about" class="origin-bg relative overflow-hidden" aria-labelledby="about-heading">
@@ -1183,6 +1466,154 @@
 
     initBeams(document.getElementById('hero-beams'), 14);
     initBeams(document.getElementById('cta-beams'), 11);
+
+    // ── ROI CALCULATOR ───────────────────────────────────────
+    function fmtCurrency(n) {
+      if (n >= 1000000) return '$' + (n / 1000000).toFixed(1) + 'M';
+      if (n >= 1000)    return '$' + Math.round(n / 1000) + 'K';
+      return '$' + n.toLocaleString();
+    }
+
+    function calcUpdate() {
+      var spend    = parseFloat(document.getElementById('calc-spend').value)  || 0;
+      var ticket   = parseFloat(document.getElementById('calc-ticket').value) || 0;
+      var closePct = parseFloat(document.getElementById('calc-close').value)  || 0;
+      var leads    = Math.round(spend / 10);
+      var booked   = Math.round(leads * 0.20);
+      var jobs     = Math.round(booked * (closePct / 100));
+      var revenue  = jobs * ticket;
+      var cpa      = booked > 0 ? Math.round(spend / booked) : 0;
+      document.getElementById('res-leads').textContent        = leads.toLocaleString();
+      document.getElementById('res-appts').textContent        = booked.toLocaleString();
+      document.getElementById('res-cpa').textContent          = cpa > 0 ? '$' + cpa.toLocaleString() : '—';
+      document.getElementById('res-revenue').textContent      = fmtCurrency(revenue);
+      document.getElementById('res-spend-label').textContent  = '$' + spend.toLocaleString();
+      document.getElementById('res-jobs').textContent         = jobs.toLocaleString() + (jobs === 1 ? ' job' : ' jobs');
+      document.getElementById('res-revenue-inline').textContent = fmtCurrency(revenue);
+    }
+
+    // ── TAB SWITCHER ─────────────────────────────────────────
+    function switchCalcTab(tab) {
+      var isCalc = tab === 'calculator';
+      document.getElementById('tab-calc-btn').classList.toggle('active', isCalc);
+      document.getElementById('tab-audit-btn').classList.toggle('active', !isCalc);
+      document.getElementById('tab-calc-btn').setAttribute('aria-selected', String(isCalc));
+      document.getElementById('tab-audit-btn').setAttribute('aria-selected', String(!isCalc));
+      document.getElementById('panel-calculator').hidden = !isCalc;
+      document.getElementById('panel-audit').hidden = isCalc;
+    }
+
+    // ── QUIZ STATE ───────────────────────────────────────────
+    var auditAnswers = {};
+    var auditCurrent = 1;
+
+    function auditSelect(btn, step, value) {
+      var stepEl = btn.closest('[data-step]');
+      stepEl.querySelectorAll('.quiz-option-btn').forEach(function(b) { b.classList.remove('selected'); });
+      btn.classList.add('selected');
+      auditAnswers[step] = value;
+      setTimeout(function() { auditGoTo(step + 1); }, 320);
+    }
+
+    function auditBack() {
+      if (auditCurrent > 1) auditGoTo(auditCurrent - 1);
+    }
+
+    function auditGoTo(step) {
+      document.querySelectorAll('.audit-step').forEach(function(s) { s.classList.add('hidden'); });
+      var target = document.querySelector('.audit-step[data-step="' + step + '"]');
+      if (!target) return;
+      target.classList.remove('hidden');
+      auditCurrent = step;
+
+      var total = 5;
+      var pct = step <= total ? Math.round(((step - 1) / total) * 100) : 100;
+      document.getElementById('audit-progress').style.width = pct + '%';
+      document.getElementById('audit-pct-label').textContent = pct + '%';
+
+      if (step <= total) {
+        document.getElementById('audit-step-label').textContent = 'Step ' + step + ' of ' + total;
+      } else if (step === 6) {
+        document.getElementById('audit-step-label').textContent = 'Your Results';
+        document.getElementById('audit-pct-label').textContent = '100%';
+        auditBuildDiagnosis();
+      } else {
+        document.getElementById('audit-step-label').textContent = '';
+        document.getElementById('audit-pct-label').textContent = '';
+      }
+
+      var backBtn = document.getElementById('audit-back-btn');
+      var showBack = step > 1 && step < 7;
+      backBtn.style.opacity = showBack ? '1' : '0';
+      backBtn.style.pointerEvents = showBack ? 'auto' : 'none';
+
+      document.getElementById('audit-nav').style.display = step >= 6 ? 'none' : 'block';
+    }
+
+    function auditBuildDiagnosis() {
+      var leads    = auditAnswers[4] || 5;
+      var bookings = auditAnswers[5] || 1;
+      var spend    = auditAnswers[3] || 0;
+      var bookRate = leads > 0 ? Math.round((bookings / leads) * 100) : 0;
+
+      var headline, cards, opportunity;
+
+      if (spend === 0) {
+        headline = "You're flying blind on acquisition.";
+        cards = [
+          { label: 'Critical Gap', title: 'No paid acquisition system', body: "Every booked appointment right now depends on someone mentioning your name. Referrals are unpredictable. When they slow down, so does your calendar — and there's nothing you can do about it.", gold: true },
+          { label: 'Opportunity', title: 'Clean starting point', body: "No wasted spend means no bad habits to unlearn. Building the right system from day one is faster and cheaper than fixing a broken one mid-run.", gold: false }
+        ];
+        opportunity = "Contractors at your revenue level who add a Meta Ads → AI qualifier → GHL pipeline typically see 20–40 booked appointments in the first 30 days. The math works fast at your ticket size.";
+      } else if (bookRate < 10) {
+        headline = "Leads are coming in. They're not booking.";
+        cards = [
+          { label: 'Primary Leak', title: 'Qualification gap — ' + bookRate + '% booking rate', body: "You're converting " + bookRate + "% of leads to appointments. Top performers run 25–35%. The gap is almost always speed-to-contact and follow-up volume — leads go cold in under 5 minutes.", gold: true },
+          { label: 'What It Costs', title: 'Monthly revenue sitting on the table', body: "If your booking rate doubled to " + Math.min(bookRate * 2, 30) + "%, you'd be booking roughly " + (bookings * 2) + " appointments a month from the same lead volume — without spending more on ads.", gold: false }
+        ];
+        opportunity = "The Closebot AI qualifier contacts new leads in under 2 minutes and follows up until they book or say no. That alone typically 2–3x the booking rate for contractors in your situation.";
+      } else if (bookRate < 25) {
+        headline = "Solid start. There's a real gap to close.";
+        cards = [
+          { label: 'Current Rate', title: bookRate + '% lead-to-booking — above average, below ceiling', body: "You're ahead of most, but every 100 leads that come in, " + (100 - bookRate) + " walk out the door without booking. At your lead volume, that's real missed revenue every month.", gold: false },
+          { label: 'The Benchmark', title: 'Top contractors: 30–35%', body: "The gap between " + bookRate + "% and 32% isn't talent — it's speed and follow-up consistency. AI qualification closes that gap automatically, at scale.", gold: true }
+        ];
+        var additionalAppts = Math.max(0, Math.round(leads * 0.30 - bookings));
+        opportunity = "Getting from " + bookRate + "% to 30% means " + additionalAppts + " additional booked appointments from your current lead flow — before you add a dollar to ad spend.";
+      } else {
+        headline = "Good numbers. The ceiling is volume.";
+        cards = [
+          { label: 'Strength', title: bookRate + '% booking rate — strong qualifier', body: "You're already converting leads at an above-average rate. The system is working. The question is whether it holds at 3x the current volume.", gold: true },
+          { label: 'The Ceiling', title: "Manual follow-up doesn't scale", body: "At higher ad spend, lead volume grows faster than a person can handle. AI qualification keeps your booking rate stable as volume increases — the ceiling disappears.", gold: false }
+        ];
+        opportunity = "With your booking rate and a structured paid acquisition push at $3K–$5K/mo in ad spend, the math points to a significant calendar increase without adding headcount.";
+      }
+
+      document.getElementById('audit-result-headline').textContent = headline;
+      document.getElementById('audit-diag-cards').innerHTML = cards.map(function(c) {
+        return '<div class="audit-diag-card ' + (c.gold ? 'gold-card' : '') + '">' +
+          '<p class="mb-1 font-body text-[0.625rem] font-medium uppercase tracking-[0.14em] ' + (c.gold ? 'text-[var(--accent)]' : 'text-[var(--text-muted)]') + ' opacity-65">' + c.label + '</p>' +
+          '<p class="mb-2 font-body text-[0.9375rem] font-medium text-[var(--text)]">' + c.title + '</p>' +
+          '<p class="font-body text-sm leading-[1.7] text-[var(--text-muted)]">' + c.body + '</p>' +
+          '</div>';
+      }).join('');
+      document.getElementById('audit-opportunity').textContent = opportunity;
+    }
+
+    function auditShowCapture() {
+      document.getElementById('h-trade').value    = auditAnswers[1] || '';
+      document.getElementById('h-revenue').value  = auditAnswers[2] || '';
+      document.getElementById('h-spend').value    = auditAnswers[3] || '';
+      document.getElementById('h-leads').value    = auditAnswers[4] || '';
+      document.getElementById('h-bookings').value = auditAnswers[5] || '';
+      auditGoTo(7);
+    }
+
+    function auditSubmit(e) {
+      e.preventDefault();
+      // Wire to GHL: replace data-ghl-action on the form with your GHL webhook or form embed URL
+      auditGoTo(8);
+    }
 
     // Scroll tilt animation
     (function () {
