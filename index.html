@@ -589,7 +589,7 @@
       #cal-modal { align-items:center; padding:1.5rem; box-sizing:border-box; }
       #cal-modal-sheet { height:auto; max-width:min(1080px, calc(100vw - 3rem)); border-radius:1.25rem; overflow:hidden; transform:translateY(16px) scale(0.97); opacity:0; transition:transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s; }
       #cal-modal.is-open #cal-modal-sheet { transform:translateY(0) scale(1); opacity:1; }
-      #cal-iframe-mobile { flex:none; height:630px; overflow-y:auto; }
+      #cal-iframe-mobile { flex:none; height:630px; overflow-y:auto; border-radius:0.625rem; }
     }
   </style>
 </head>
@@ -1614,7 +1614,7 @@
               id="10VqhYI2pwYT7PoP6vcn_1781150811121"
               src="https://link.zhedconsulting.com/widget/booking/10VqhYI2pwYT7PoP6vcn"
               style="width:100%;min-height:640px;border:none;display:block;"
-              scrolling="no"
+              scrolling="yes"
               title="Book a Strategy Call — Zhed Consulting"
             ></iframe>
           </div>
@@ -1640,9 +1640,11 @@
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
         </button>
       </div>
-      <iframe id="cal-iframe-mobile" src="" scrolling="yes"
-        style="width:100%;border:none;display:block;"
-        title="Book a Strategy Call — Zhed Consulting"></iframe>
+      <div style="padding:0.75rem 1.25rem 1.25rem;flex:1;min-height:0;">
+        <iframe id="cal-iframe-mobile" src="" scrolling="yes"
+          style="width:100%;border:none;display:block;border-radius:0.625rem;overflow:hidden;"
+          title="Book a Strategy Call — Zhed Consulting"></iframe>
+      </div>
     </div>
   </div>
 
