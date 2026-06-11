@@ -181,21 +181,10 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet"></noscript>
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            display: ['"Instrument Serif"', 'Georgia', 'serif'],
-            body:    ['"DM Sans"', 'system-ui', 'sans-serif'],
-          },
-        },
-      },
-    };
-  </script>
+  <link rel="stylesheet" href="/tailwind.min.css">
 
   <style>
     :root {
@@ -1319,12 +1308,18 @@
         <!-- Right: founder photo -->
         <div class="mt-14 flex-shrink-0 lg:mt-0 lg:w-80 xl:w-96">
           <div class="overflow-hidden rounded-2xl" style="border: 1px solid rgba(201,168,76,0.15); box-shadow: 0 0 0 1px rgba(201,168,76,0.06), 0 24px 64px -12px rgba(0,0,0,0.7);">
-            <img
-              src="/brand_assets/founder.png"
-              alt="Zhedrick Johnson, Founder of Zhed Consulting"
-              class="w-full block"
-              style="display:block; aspect-ratio:4/5; object-fit:cover; object-position:center top;"
-            >
+            <picture>
+              <source srcset="/brand_assets/founder.webp" type="image/webp">
+              <img
+                src="/brand_assets/founder.png"
+                alt="Zhedrick Johnson, Founder of Zhed Consulting"
+                class="w-full block"
+                loading="lazy"
+                decoding="async"
+                width="384" height="480"
+                style="display:block; aspect-ratio:4/5; object-fit:cover; object-position:center top;"
+              >
+            </picture>
           </div>
         </div>
 
