@@ -338,27 +338,26 @@
     .calc-input-wrap label { display: block; font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem; }
     .calc-slider {
       -webkit-appearance: none; appearance: none;
-      width: 100%; height: 4px; border-radius: 4px; outline: none; cursor: pointer;
+      width: 100%; height: 5px; border-radius: 4px; outline: none; cursor: pointer;
       background: linear-gradient(to right, var(--accent) 0%, var(--accent) var(--pct, 30%), rgba(255,255,255,0.1) var(--pct, 30%), rgba(255,255,255,0.1) 100%);
-      transition: opacity 0.2s ease;
     }
     .calc-slider::-webkit-slider-thumb {
       -webkit-appearance: none; appearance: none;
-      width: 20px; height: 20px; border-radius: 50%;
+      width: 22px; height: 22px; border-radius: 50%;
       background: var(--accent);
-      box-shadow: 0 0 0 3px rgba(201,168,76,0.2), 0 2px 8px rgba(0,0,0,0.4);
+      box-shadow: 0 0 0 4px rgba(201,168,76,0.18), 0 2px 10px rgba(0,0,0,0.45);
       transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s ease;
       cursor: grab;
     }
-    .calc-slider::-webkit-slider-thumb:active { cursor: grabbing; transform: scale(1.2); box-shadow: 0 0 0 5px rgba(201,168,76,0.25), 0 2px 12px rgba(0,0,0,0.5); }
+    .calc-slider::-webkit-slider-thumb:active { cursor: grabbing; transform: scale(1.18); box-shadow: 0 0 0 6px rgba(201,168,76,0.22), 0 2px 14px rgba(0,0,0,0.55); }
     .calc-slider::-moz-range-thumb {
-      width: 20px; height: 20px; border-radius: 50%; border: none;
+      width: 22px; height: 22px; border-radius: 50%; border: none;
       background: var(--accent);
-      box-shadow: 0 0 0 3px rgba(201,168,76,0.2), 0 2px 8px rgba(0,0,0,0.4);
+      box-shadow: 0 0 0 4px rgba(201,168,76,0.18), 0 2px 10px rgba(0,0,0,0.45);
       cursor: grab;
     }
     .calc-slider:focus-visible { outline: 2px solid var(--accent-bright); outline-offset: 4px; }
-    .calc-val { font-family: "Instrument Serif", Georgia, serif; font-size: 1.75rem; letter-spacing: -0.04em; line-height: 1; color: var(--text); }
+    .calc-val { font-family: "Instrument Serif", Georgia, serif; font-size: 1.875rem; letter-spacing: -0.04em; line-height: 1; color: var(--text); }
     .calc-result-card { background: rgba(255,255,255,0.022); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 1.25rem 1.375rem; }
     .calc-result-card.gold { background: rgba(201,168,76,0.06); border-color: rgba(201,168,76,0.28); box-shadow: 0 0 0 1px rgba(201,168,76,0.1), 0 4px 20px -4px rgba(201,168,76,0.12); }
     .calc-result-value { font-family: "Instrument Serif", Georgia, serif; letter-spacing: -0.04em; line-height: 1; color: var(--accent); }
@@ -845,10 +844,10 @@
 
       <!-- ─── ROI CALCULATOR ─── -->
       <div id="panel-calculator" role="tabpanel">
-        <div class="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-14">
+        <div class="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-16 xl:gap-20">
 
           <!-- Inputs -->
-          <div class="flex flex-col gap-7 lg:w-[40%] lg:flex-shrink-0">
+          <div class="flex flex-col gap-9 lg:w-[46%] lg:flex-shrink-0">
             <div class="calc-input-wrap">
               <div class="mb-3 flex items-end justify-between">
                 <label for="calc-spend">Monthly Ad Spend</label>
@@ -1102,14 +1101,14 @@
           </div>
         </div>
 
-        <!-- Right: brand lockup -->
-        <div class="mt-14 flex-shrink-0 lg:mt-0 lg:w-72 xl:w-80">
-          <div class="overflow-hidden rounded-2xl" style="border: 1px solid rgba(201,168,76,0.12); background: rgba(201,168,76,0.03);">
+        <!-- Right: founder photo -->
+        <div class="mt-14 flex-shrink-0 lg:mt-0 lg:w-80 xl:w-96">
+          <div class="overflow-hidden rounded-2xl" style="border: 1px solid rgba(201,168,76,0.15); box-shadow: 0 0 0 1px rgba(201,168,76,0.06), 0 24px 64px -12px rgba(0,0,0,0.7);">
             <img
-              src="/brand_assets/og-image.png"
-              alt="Zhed Consulting"
+              src="/brand_assets/founder.png"
+              alt="Zhed, Founder of Zhed Consulting"
               class="w-full block"
-              style="mix-blend-mode: normal;"
+              style="display:block; aspect-ratio:4/5; object-fit:cover; object-position:center top;"
             >
           </div>
         </div>
