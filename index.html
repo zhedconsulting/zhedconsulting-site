@@ -1613,7 +1613,7 @@
             <iframe
               id="10VqhYI2pwYT7PoP6vcn_1781150811121"
               src="https://link.zhedconsulting.com/widget/booking/10VqhYI2pwYT7PoP6vcn"
-              style="width:100%;min-height:640px;border:none;display:block;"
+              style="width:100%;height:640px;border:none;display:block;"
               scrolling="yes"
               title="Book a Strategy Call — Zhed Consulting"
             ></iframe>
@@ -2013,6 +2013,19 @@
       setTimeout(function() {
         if (shimmer.style.display !== 'none') revealCalendar();
       }, 8000);
+    })();
+
+    // ── Lock inline calendar height so time slots scroll inside iframe ──
+    (function() {
+      var cal = document.getElementById('10VqhYI2pwYT7PoP6vcn_1781150811121');
+      if (!cal) return;
+      var CAP = 640;
+      var obs = new MutationObserver(function() {
+        obs.disconnect();
+        if (parseInt(cal.style.height) > CAP) cal.style.height = CAP + 'px';
+        obs.observe(cal, { attributes: true, attributeFilter: ['style'] });
+      });
+      obs.observe(cal, { attributes: true, attributeFilter: ['style'] });
     })();
 
     // ── Calendar modal (all devices) ─────────────────────────────────
