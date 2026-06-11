@@ -1531,15 +1531,15 @@
 
       <p class="section-overline font-body mb-8 text-[0.6875rem] font-medium uppercase tracking-[0.18em] sm:mb-10 sm:text-xs">Let's talk</p>
 
-      <div class="flex flex-col gap-14 lg:flex-row lg:items-start lg:gap-16 xl:gap-20">
+      <div class="grid grid-cols-1 gap-14 lg:grid-cols-2 lg:gap-12 xl:gap-16">
 
         <!-- Left: copy -->
-        <div class="flex flex-col lg:flex-1 lg:pt-2">
-          <h2 id="cta-heading" class="cta-heading mb-6 text-[2.5rem] font-normal text-[var(--text)] sm:text-[3rem] lg:text-[3.5rem] xl:text-[4rem]">
+        <div class="flex flex-col lg:pt-2">
+          <h2 id="cta-heading" class="cta-heading mb-6 text-[2.5rem] font-normal text-[var(--text)] sm:text-[3rem] lg:text-[2.75rem] xl:text-[3.25rem]">
             Ready to fill<br>your calendar?
           </h2>
 
-          <p class="mb-10 max-w-md text-[0.9375rem] leading-[1.7] text-[var(--text-muted)] sm:text-lg">
+          <p class="mb-10 text-[0.9375rem] leading-[1.7] text-[var(--text-muted)] sm:text-base">
             20 minutes. No pitch. We look at your numbers, your market, and tell you exactly what the Booked Solid System would do for your business.
           </p>
 
@@ -1583,7 +1583,7 @@
         </div>
 
         <!-- Desktop: calendar with shimmer (hidden on mobile) -->
-        <div class="hidden lg:block w-full flex-shrink-0 lg:w-[520px] xl:w-[580px]">
+        <div class="hidden lg:block min-w-0">
 
           <!-- Shimmer skeleton shown while GHL loads -->
           <div id="cal-shimmer" class="overflow-hidden rounded-2xl" style="min-height:640px; background:#141416; box-shadow:0 32px 80px -16px rgba(0,0,0,0.75), 0 0 0 1px rgba(201,168,76,0.12); padding:1.75rem 1.75rem 0;">
