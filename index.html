@@ -142,6 +142,41 @@
     .pain-headline { font-family: "Instrument Serif", Georgia, serif; letter-spacing: -0.02em; line-height: 1.1; }
     .pain-rule { background: linear-gradient(90deg, var(--accent), transparent); opacity: 0.6; }
 
+    /* ── FLIP CARDS ─────────────────────── */
+    .flip-card { perspective: 1300px; cursor: pointer; }
+    .flip-inner {
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+    .flip-front, .flip-back {
+      backface-visibility: hidden; -webkit-backface-visibility: hidden;
+      border-radius: 8px;
+      padding: 1.75rem;
+      display: flex; flex-direction: column;
+    }
+    .flip-front {
+      background-color: rgba(255,255,255,0.022);
+      border: 1px solid rgba(201,168,76,0.12);
+      box-shadow: inset 0 1px 0 rgba(201,168,76,0.07);
+    }
+    .flip-back {
+      position: absolute; inset: 0; overflow: hidden;
+      transform: rotateY(180deg);
+      background: rgba(201,168,76,0.06);
+      border: 1px solid rgba(201,168,76,0.26);
+      box-shadow: 0 0 50px -12px rgba(201,168,76,0.2), inset 0 1px 0 rgba(201,168,76,0.16);
+    }
+    @media (min-width: 640px) { .flip-front, .flip-back { padding: 2rem; } }
+    @media (min-width: 1024px) { .flip-front, .flip-back { padding: 2.25rem; } }
+    .flip-hint {
+      margin-top: auto; padding-top: 1.25rem;
+      font-size: 0.6875rem; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(155,155,163,0.4);
+    }
+
     /* ── SYSTEM ──────────────────────────── */
     .system-bg {
       background-color: var(--bg);
@@ -498,112 +533,104 @@
   <!-- ════════════════════════════════════════
        THE PROBLEM
   ════════════════════════════════════════ -->
-  <section id="problem" class="problem-bg relative overflow-hidden" aria-labelledby="problem-heading">
+  <!-- ════════════════════════════════════════
+       PROBLEM + FIX (FLIP CARDS)
+  ════════════════════════════════════════ -->
+  <section id="system" class="problem-bg relative overflow-hidden" aria-labelledby="system-heading">
     <div class="noise-overlay absolute inset-0 z-[1]" style="filter:url(#noise); background:#fff;" aria-hidden="true"></div>
     <div class="section-divider absolute inset-x-0 top-0 z-[2] h-px" aria-hidden="true"></div>
 
     <div class="relative z-10 mx-auto w-full max-w-6xl px-5 py-24 sm:px-8 sm:py-32 lg:px-12 lg:py-36">
-      <p class="section-overline font-body mb-7 text-[0.6875rem] font-medium uppercase tracking-[0.18em] sm:mb-8 sm:text-xs">What you're actually dealing with</p>
+      <p class="section-overline font-body mb-7 text-[0.6875rem] font-medium uppercase tracking-[0.18em] sm:mb-8 sm:text-xs">The Problem &amp; The Fix</p>
 
-      <h2 id="problem-heading" class="section-heading max-w-4xl text-[2rem] font-normal text-[var(--text)] sm:text-[2.75rem] md:text-[3.25rem] lg:text-[3.75rem]">
+      <h2 id="system-heading" class="section-heading max-w-4xl text-[2rem] font-normal text-[var(--text)] sm:text-[2.75rem] md:text-[3.25rem] lg:text-[3.75rem]">
         You don't have a lead problem.<br>
         You have a <em class="not-italic text-[var(--accent)]">booked-appointment</em> problem.
       </h2>
 
       <p class="mt-7 max-w-2xl text-[0.9375rem] leading-[1.7] text-[var(--text-muted)] sm:mt-8 sm:text-lg">
-        Every contractor I talk to is drowning in the same three things. None of them are about needing "more leads."
+        Every contractor I talk to has the same three pain points. Tap any card to see exactly how we fix it.
       </p>
 
       <div class="mt-14 grid grid-cols-1 gap-5 sm:mt-16 sm:gap-6 md:grid-cols-3 lg:mt-20 lg:gap-7">
 
-        <article class="pain-card p-7 sm:p-8 lg:p-9">
-          <div class="pain-numeral mb-7 text-[4.5rem] sm:mb-8 sm:text-[5rem]">01</div>
-          <div class="pain-rule mb-5 h-px w-10 sm:mb-6" aria-hidden="true"></div>
-          <h3 class="pain-headline mb-3 text-[1.5rem] text-[var(--text)] sm:mb-4 sm:text-[1.75rem]">Form fills that never pick up the phone.</h3>
-          <p class="text-[0.9375rem] leading-[1.65] text-[var(--text-muted)] sm:text-base">
-            You're paying $80 a lead for people kicking tires at 11pm. Half won't answer. The other half wanted a price for a job they're never doing.
-          </p>
-        </article>
-
-        <article class="pain-card p-7 sm:p-8 lg:p-9">
-          <div class="pain-numeral mb-7 text-[4.5rem] sm:mb-8 sm:text-[5rem]">02</div>
-          <div class="pain-rule mb-5 h-px w-10 sm:mb-6" aria-hidden="true"></div>
-          <h3 class="pain-headline mb-3 text-[1.5rem] text-[var(--text)] sm:mb-4 sm:text-[1.75rem]">Agencies that send screenshots, not appointments.</h3>
-          <p class="text-[0.9375rem] leading-[1.65] text-[var(--text-muted)] sm:text-base">
-            Two grand a month for a Loom video, a dashboard you don't understand, and excuses about the algorithm. Your calendar looks the same as it did in January.
-          </p>
-        </article>
-
-        <article class="pain-card p-7 sm:p-8 lg:p-9">
-          <div class="pain-numeral mb-7 text-[4.5rem] sm:mb-8 sm:text-[5rem]">03</div>
-          <div class="pain-rule mb-5 h-px w-10 sm:mb-6" aria-hidden="true"></div>
-          <h3 class="pain-headline mb-3 text-[1.5rem] text-[var(--text)] sm:mb-4 sm:text-[1.75rem]">Crews on the clock, no jobs to run.</h3>
-          <p class="text-[0.9375rem] leading-[1.65] text-[var(--text-muted)] sm:text-base">
-            Three guys, a wrapped truck, and a Tuesday with one estimate on it. You're not short on capacity — you're short on appointments worth showing up to.
-          </p>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ════════════════════════════════════════
-       THE BOOKED SOLID SYSTEM
-  ════════════════════════════════════════ -->
-  <section id="system" class="system-bg relative overflow-hidden" aria-labelledby="system-heading">
-    <div class="section-divider absolute inset-x-0 top-0 h-px" aria-hidden="true"></div>
-
-    <div class="relative z-10 mx-auto w-full max-w-6xl px-5 py-24 sm:px-8 sm:py-32 lg:px-12 lg:py-36">
-      <p class="section-overline font-body mb-7 text-[0.6875rem] font-medium uppercase tracking-[0.18em] sm:mb-8 sm:text-xs">The Booked Solid System</p>
-
-      <h2 id="system-heading" class="section-heading max-w-2xl text-[2rem] font-normal text-[var(--text)] sm:text-[2.75rem] md:text-[3.25rem] lg:text-[3.75rem]">
-        Three steps.<br>One outcome.
-      </h2>
-
-      <p class="mt-6 max-w-xl text-[0.9375rem] leading-[1.7] text-[var(--text-muted)] sm:mt-7 sm:text-lg">
-        This is a system, not a service. Every step runs without you lifting a finger. You just show up to the appointment.
-      </p>
-
-      <div class="mt-14 grid grid-cols-1 gap-6 sm:mt-16 md:grid-cols-3 lg:mt-20 lg:gap-8">
-
-        <article class="step-card p-7 sm:p-8 lg:p-9">
-          <div class="step-number mb-5 text-[3.5rem] sm:text-[4rem]">01</div>
-          <div class="mb-5 flex h-9 w-9 items-center justify-center rounded-full" style="border:1px solid rgba(201,168,76,0.3); background:rgba(201,168,76,0.12);" aria-hidden="true">
-            <svg class="h-4 w-4 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5"/>
-            </svg>
+        <!-- Card 1 -->
+        <div class="flip-card" aria-label="Problem 1 — tap to reveal the fix">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="pain-numeral mb-6 text-[4.5rem] sm:text-[5rem]">01</div>
+              <div class="pain-rule mb-5 h-px w-10" aria-hidden="true"></div>
+              <h3 class="pain-headline mb-3 text-[1.375rem] text-[var(--text)] sm:text-[1.625rem]">Form fills that never pick up the phone.</h3>
+              <p class="text-[0.9375rem] leading-[1.65] text-[var(--text-muted)] sm:text-base">
+                You're paying $80 a lead for people kicking tires at 11pm. Half won't answer. The other half wanted a price for a job they're never doing.
+              </p>
+              <p class="flip-hint">Tap to see the fix →</p>
+            </div>
+            <div class="flip-back">
+              <div class="step-number mb-4 text-[3.5rem] sm:text-[4rem]">01</div>
+              <div class="mb-4 flex h-9 w-9 items-center justify-center rounded-full" style="border:1px solid rgba(201,168,76,0.3);background:rgba(201,168,76,0.12);" aria-hidden="true">
+                <svg class="h-4 w-4 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5"/></svg>
+              </div>
+              <h3 class="step-title mb-3 text-[1.375rem] sm:text-[1.625rem]" style="color:var(--accent-bright);">Meta Ads</h3>
+              <p class="text-[0.9375rem] leading-[1.65] text-[var(--text-muted)] sm:text-base">
+                We build and run campaigns targeting homeowners already in buying mode — not cold audiences scrolling past cat videos. Creative, copy, targeting. All of it handled.
+              </p>
+              <p class="flip-hint">← Tap to flip back</p>
+            </div>
           </div>
-          <h3 class="step-title mb-3 text-[1.375rem] text-[var(--text)] sm:mb-4 sm:text-[1.625rem]">Meta Ads</h3>
-          <p class="text-[0.9375rem] leading-[1.65] text-[var(--text-muted)] sm:text-base">
-            We build and run campaigns targeting homeowners already in buying mode — not cold audiences scrolling past cat videos. Creative, copy, targeting. All of it handled.
-          </p>
-        </article>
+        </div>
 
-        <article class="step-card p-7 sm:p-8 lg:p-9">
-          <div class="step-number mb-5 text-[3.5rem] sm:text-[4rem]">02</div>
-          <div class="mb-5 flex h-9 w-9 items-center justify-center rounded-full" style="border:1px solid rgba(201,168,76,0.3); background:rgba(201,168,76,0.12);" aria-hidden="true">
-            <svg class="h-4 w-4 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"/>
-            </svg>
+        <!-- Card 2 -->
+        <div class="flip-card" aria-label="Problem 2 — tap to reveal the fix">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="pain-numeral mb-6 text-[4.5rem] sm:text-[5rem]">02</div>
+              <div class="pain-rule mb-5 h-px w-10" aria-hidden="true"></div>
+              <h3 class="pain-headline mb-3 text-[1.375rem] text-[var(--text)] sm:text-[1.625rem]">Agencies that send screenshots, not appointments.</h3>
+              <p class="text-[0.9375rem] leading-[1.65] text-[var(--text-muted)] sm:text-base">
+                Two grand a month for a Loom video, a dashboard you don't understand, and excuses about the algorithm. Your calendar looks the same as it did in January.
+              </p>
+              <p class="flip-hint">Tap to see the fix →</p>
+            </div>
+            <div class="flip-back">
+              <div class="step-number mb-4 text-[3.5rem] sm:text-[4rem]">02</div>
+              <div class="mb-4 flex h-9 w-9 items-center justify-center rounded-full" style="border:1px solid rgba(201,168,76,0.3);background:rgba(201,168,76,0.12);" aria-hidden="true">
+                <svg class="h-4 w-4 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"/></svg>
+              </div>
+              <h3 class="step-title mb-3 text-[1.375rem] sm:text-[1.625rem]" style="color:var(--accent-bright);">Closebot AI Qualifier</h3>
+              <p class="text-[0.9375rem] leading-[1.65] text-[var(--text-muted)] sm:text-base">
+                Every inquiry gets a text follow-up within seconds. Closebot qualifies them on budget, timeline, and scope before a human ever sees the lead. Tire-kickers get filtered out. Real buyers get booked.
+              </p>
+              <p class="flip-hint">← Tap to flip back</p>
+            </div>
           </div>
-          <h3 class="step-title mb-3 text-[1.375rem] text-[var(--text)] sm:mb-4 sm:text-[1.625rem]">Closebot AI Qualifier</h3>
-          <p class="text-[0.9375rem] leading-[1.65] text-[var(--text-muted)] sm:text-base">
-            Every inquiry gets a text follow-up within seconds. Closebot qualifies them on budget, timeline, and scope before a human touches the lead. Tire-kickers get filtered out. Real buyers get booked.
-          </p>
-        </article>
+        </div>
 
-        <article class="step-card p-7 sm:p-8 lg:p-9">
-          <div class="step-number mb-5 text-[3.5rem] sm:text-[4rem]">03</div>
-          <div class="mb-5 flex h-9 w-9 items-center justify-center rounded-full" style="border:1px solid rgba(201,168,76,0.3); background:rgba(201,168,76,0.12);" aria-hidden="true">
-            <svg class="h-4 w-4 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 9v7.5m-9-6h.008v.008H12V11.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM12 15h.008v.008H12V15zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-4.5 0h.008v.008H7.5V15zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
-            </svg>
+        <!-- Card 3 -->
+        <div class="flip-card" aria-label="Problem 3 — tap to reveal the fix">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="pain-numeral mb-6 text-[4.5rem] sm:text-[5rem]">03</div>
+              <div class="pain-rule mb-5 h-px w-10" aria-hidden="true"></div>
+              <h3 class="pain-headline mb-3 text-[1.375rem] text-[var(--text)] sm:text-[1.625rem]">Crews on the clock, no jobs to run.</h3>
+              <p class="text-[0.9375rem] leading-[1.65] text-[var(--text-muted)] sm:text-base">
+                Three guys, a wrapped truck, and a Tuesday with one estimate on it. You're not short on capacity — you're short on appointments worth showing up to.
+              </p>
+              <p class="flip-hint">Tap to see the fix →</p>
+            </div>
+            <div class="flip-back">
+              <div class="step-number mb-4 text-[3.5rem] sm:text-[4rem]">03</div>
+              <div class="mb-4 flex h-9 w-9 items-center justify-center rounded-full" style="border:1px solid rgba(201,168,76,0.3);background:rgba(201,168,76,0.12);" aria-hidden="true">
+                <svg class="h-4 w-4 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 9v7.5m-9-6h.008v.008H12V11.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM12 15h.008v.008H12V15zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-4.5 0h.008v.008H7.5V15zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
+              </div>
+              <h3 class="step-title mb-3 text-[1.375rem] sm:text-[1.625rem]" style="color:var(--accent-bright);">Booked Appointment</h3>
+              <p class="text-[0.9375rem] leading-[1.65] text-[var(--text-muted)] sm:text-base">
+                Qualified prospects book directly onto your calendar through GHL. You show up. You close. Nothing else is your job.
+              </p>
+              <p class="flip-hint">← Tap to flip back</p>
+            </div>
           </div>
-          <h3 class="step-title mb-3 text-[1.375rem] text-[var(--text)] sm:mb-4 sm:text-[1.625rem]">Booked Appointment</h3>
-          <p class="text-[0.9375rem] leading-[1.65] text-[var(--text-muted)] sm:text-base">
-            Qualified prospects book directly onto your calendar through GHL. You show up. You close. Nothing else is your job.
-          </p>
-        </article>
+        </div>
 
       </div>
 
@@ -1561,6 +1588,11 @@
       document.getElementById('res-jobs').textContent           = jobs.toLocaleString() + (jobs === 1 ? ' job' : ' jobs');
       document.getElementById('res-revenue-inline').textContent = fmtCurrency(revenue);
     }
+
+    // Flip cards — click to toggle
+    document.querySelectorAll('.flip-card').forEach(function(card) {
+      card.addEventListener('click', function() { card.classList.toggle('flipped'); });
+    });
 
     // Init slider fills on load
     document.addEventListener('DOMContentLoaded', function() {
