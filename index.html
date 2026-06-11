@@ -585,10 +585,10 @@
     #cal-modal-sheet { position:relative; width:100%; max-width:520px; height:100dvh; border-radius:0; overflow:hidden; background:#fff; display:flex; flex-direction:column; transform:translateY(100%); transition:transform 0.35s cubic-bezier(0.4,0,0.2,1); }
     #cal-modal.is-open #cal-modal-sheet { transform:translateY(0); }
     @media (min-width:640px) {
-      #cal-modal { align-items:center; padding:2.5rem; }
-      #cal-modal-sheet { height:auto; max-height:calc(100dvh - 5rem); max-width:640px; border-radius:1.25rem; transform:translateY(16px) scale(0.97); opacity:0; transition:transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s; }
+      #cal-modal { align-items:center; padding:2rem; box-sizing:border-box; }
+      #cal-modal-sheet { height:auto; max-height:calc(100dvh - 4rem); max-width:660px; border-radius:1.25rem; overflow:hidden; overflow-y:auto; transform:translateY(16px) scale(0.97); opacity:0; transition:transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s; }
       #cal-modal.is-open #cal-modal-sheet { transform:translateY(0) scale(1); opacity:1; }
-      #cal-iframe-mobile { min-height:680px; }
+      #cal-iframe-mobile { min-height:800px; flex:none; }
     }
   </style>
 </head>
