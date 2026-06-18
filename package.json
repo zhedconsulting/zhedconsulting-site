@@ -8,6 +8,10 @@
     "screenshot": "node screenshot.mjs http://localhost:3000"
   },
   "dependencies": {
-    "puppeteer": "^24.10.0"
+    "puppeteer": "^24.10.0",
+    "sharp": "^0.34.5"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
   }
 }
