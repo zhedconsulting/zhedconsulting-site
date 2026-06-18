@@ -26,6 +26,64 @@ Format: `[Date] — What changed — Status`
 
 ---
 
+## 2026-06-17 — Rebrand + Pricing Cleanup
+
+### Brand
+- [x] Rebranded to **The Lead Engine** — name, copy, and positioning updated throughout site
+- [x] Broadened ICP from home service contractors to all service businesses
+
+### Pricing
+- [x] Removed fixed setup fee price from all pricing tiers — fee language kept but dollar amount pulled
+
+---
+
+## 2026-06-11 — Calendar → GHL Contact Form Swap + Modal Polish
+
+### CTA / Book Section
+- [x] Replaced the inline GHL calendar widget with a **GHL contact form embed** — contact form is now the primary conversion point
+- [x] Fixed mobile modal scroll — restored flex layout on iframe wrapper so content scrolls correctly inside modal
+- [x] Modal: fixed viewport-aware height, no edge touching on any screen size
+- [x] Extensive desktop modal sizing passes — landed on final dimensions that trigger GHL's side-by-side calendar + time slot layout at 1080px wide
+- [x] Fixed modal iframe height conflict — removed inline flex style that was overriding the stretch
+- [x] Mobile: full-screen calendar modal (near-full-screen popup, no cropping)
+- [x] Calendar iframe preloaded on page load — all booking buttons wired correctly
+- [x] Mobile popup + desktop section shimmer pattern for calendar booking area
+
+---
+
+## 2026-06-10 — Day 1 Build (Post-Initial Commit)
+
+### Performance & SEO
+- [x] Replaced Tailwind CDN with compiled `tailwind.min.css` — eliminates runtime JIT overhead
+- [x] Images converted to WebP
+- [x] Fonts loaded async — no render-blocking
+- [x] Schema markup added (`LocalBusiness` + `Service` JSON-LD)
+- [x] Canonical tag added to `<head>`
+- [x] `sitemap.xml` and `robots.txt` added to project root
+
+### Design / Animation
+- [x] Gold beam background animation added to Hero and CTA sections
+- [x] Flip card system — Problem and System (How It Works) sections merged into interactive flip cards
+- [x] Flip card hint text changed to gold so it reads as a clickable affordance
+- [x] Gold glow added to step/pain numerals and proof metrics for emphasis
+
+### New Sections
+- [x] **ROI Calculator** — gold sliders, live output showing projected cost per lead and appointment volume
+- [x] **Free Lead Audit** CTA block added below calculator
+
+### About Section
+- [x] Favicon added (`/brand_assets/favicon`)
+- [x] OG image added for social link previews
+- [x] About section brand lockup with founder photo slot
+- [x] Canvas performance fix — removed GPU-intensive layer
+- [x] Founder full name added to About section
+
+### Proof / Case Study
+- [x] Case study updated with corrected data and expanded metrics
+- [x] Founder photo swapped; calculator layout widened
+
+---
+
 ## Sections — Current State
 
 ### Nav
@@ -100,9 +158,9 @@ Format: `[Date] — What changed — Status`
 ### CTA / Book Section
 
 - [x] Headline: "Ready to fill your calendar?"
-- [x] Mock booking form — Name, Phone, Trade, Revenue range
-- [ ] REPLACE mock form with real GHL iframe embed (blocking conversion)
-- [ ] Test form submission end-to-end after GHL embed is live
+- [x] Mock booking form replaced with live GHL contact form embed
+- [x] GHL calendar booking widget integrated (modal on mobile, inline on desktop)
+- [ ] Test GHL form submission end-to-end in production
 
 ### Footer
 
@@ -116,22 +174,23 @@ Format: `[Date] — What changed — Status`
 
 ### High Priority
 
-- [ ] **GHL form embed** — swap mock form with real iframe. This is the only thing blocking conversions.
+- [x] **GHL contact form embed** — live, replacing mock form
 - [ ] **Custom domain** — point `zhedconsulting.com` to Vercel (Vercel dashboard → Domains)
+- [ ] Test GHL form submission end-to-end in production
 
 ### Content
 
 - [ ] Add 2 more client logos/names to trust strip
 - [ ] Add 2nd case study when next client result is ready
-- [ ] Add founder photo to About section
+- [ ] Add founder photo to About section (slot is built, photo needed)
 - [ ] Review and update FAQ based on real objections heard on calls
 
 ### Design / Features
 
+- [x] OG image added for social link previews
+- [x] Favicon added
 - [ ] Add stagger animation to pipeline lead cards after tilt completes
 - [ ] Add active nav highlight on scroll
-- [ ] Add OG image (social preview card) for link sharing
-- [ ] Add favicon
 - [ ] Mobile layout QA pass — spot-check all sections on 375px viewport
 
 ### Analytics / Tracking
@@ -139,6 +198,11 @@ Format: `[Date] — What changed — Status`
 - [ ] Add Meta Pixel to `<head>` (conversion tracking)
 - [ ] Add GHL tracking script to `<head>`
 - [ ] Set up Vercel Analytics (free, zero config)
+
+### Brand (Post-Rebrand Cleanup)
+
+- [ ] Confirm all copy reflects The Lead Engine rebrand — no "Zhed Consulting" references visible on site
+- [ ] Update domain strategy if rebrand changes the target domain
 
 ---
 

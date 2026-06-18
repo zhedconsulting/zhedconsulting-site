@@ -444,6 +444,30 @@
     select.form-field { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239b9ba3' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
     select.form-field option { background: #141416; color: var(--text); }
 
+    /* ── STATS STRIP ────────────────────── */
+    .stat-number { font-family: "Instrument Serif", Georgia, serif; font-size: 1.875rem; letter-spacing: -0.03em; line-height: 1; color: var(--accent); }
+    .stat-label  { font-family: "DM Sans", system-ui, sans-serif; font-size: 0.6875rem; color: var(--text-muted); opacity: 0.55; margin-top: 0.3rem; letter-spacing: 0.01em; }
+    .stat-divider { width: 1px; height: 36px; background: rgba(255,255,255,0.07); flex-shrink: 0; }
+
+    /* ── TRUST BADGE ─────────────────────── */
+    .trust-badge {
+      display: inline-flex; align-items: center; padding: 0.3rem 0.8rem;
+      border-radius: 999px; border: 1px solid rgba(255,255,255,0.09);
+      background: rgba(255,255,255,0.035);
+      font-family: "DM Sans", system-ui, sans-serif; font-size: 0.6875rem;
+      font-weight: 500; color: var(--text-muted); opacity: 0.65; letter-spacing: 0.02em;
+    }
+
+    /* ── STICKY CTA ──────────────────────── */
+    .sticky-bar {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 40;
+      background: rgba(12,12,14,0.92); backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(255,255,255,0.07);
+      transform: translateY(100%);
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .sticky-bar.visible { transform: translateY(0); }
+
     /* ── BEAMS ───────────────────────────── */
     .beams-canvas { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:0; filter:blur(28px); }
     @keyframes beams-pulse { 0%,100%{opacity:0.04} 50%{opacity:0.12} }
@@ -561,7 +585,7 @@
   <nav id="main-nav" class="fixed inset-x-0 top-0 z-50" aria-label="Main navigation">
     <div class="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-4 sm:px-8 lg:px-12">
 
-      <a href="#hero" class="font-body text-[0.6875rem] font-medium uppercase tracking-[0.22em] text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--text)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--accent)] focus-visible:outline-offset-2 focus-visible:rounded">
+      <a href="#hero" class="font-body text-[0.6875rem] font-medium uppercase tracking-[0.22em] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--accent)] focus-visible:outline-offset-2 focus-visible:rounded" style="color:var(--accent);">
         Zhed Consulting
       </a>
 
@@ -639,18 +663,30 @@
   </section>
 
   <!-- ════════════════════════════════════════
-       TRUST STRIP
+       STATS STRIP
   ════════════════════════════════════════ -->
-  <div aria-label="Trusted by">
-    <div class="mx-auto flex w-full max-w-6xl flex-col items-center gap-5 px-5 py-7 sm:flex-row sm:justify-between sm:px-8 lg:px-12" style="border-top:1px solid rgba(255,255,255,0.045); border-bottom:1px solid rgba(255,255,255,0.045);">
-      <p class="font-body whitespace-nowrap text-[0.625rem] font-medium uppercase tracking-[0.2em] text-[var(--text-muted)] opacity-40">
-        Trusted by
-      </p>
-      <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-10">
-        <span class="font-body text-sm font-medium tracking-[0.04em] text-[var(--text-muted)] opacity-55">Niko — Metro Detroit Epoxy</span>
-        <span class="font-body text-sm font-medium tracking-[0.04em] text-[var(--text-muted)] opacity-55">Martin — Spektra Painting</span>
-        <div class="h-4 w-20 rounded" style="background:rgba(255,255,255,0.06);" aria-hidden="true"></div>
+  <div aria-label="Results at a glance" style="border-top:1px solid rgba(255,255,255,0.045); border-bottom:1px solid rgba(255,255,255,0.045);">
+    <div class="mx-auto flex w-full max-w-6xl flex-col items-center gap-6 px-5 py-8 sm:flex-row sm:justify-center sm:gap-0 sm:px-8 lg:px-12">
+
+      <div class="flex flex-col items-center sm:px-10 lg:px-14">
+        <p class="stat-number">66</p>
+        <p class="stat-label text-center">Qualified leads in 30 days</p>
       </div>
+
+      <div class="stat-divider hidden sm:block"></div>
+
+      <div class="flex flex-col items-center sm:px-10 lg:px-14">
+        <p class="stat-number">$16.97</p>
+        <p class="stat-label text-center">Avg. cost per booked appointment</p>
+      </div>
+
+      <div class="stat-divider hidden sm:block"></div>
+
+      <div class="flex flex-col items-center sm:px-10 lg:px-14">
+        <p class="stat-number">7–14</p>
+        <p class="stat-label text-center">Days to first booked appointment</p>
+      </div>
+
     </div>
   </div>
 
@@ -1064,6 +1100,33 @@
           </figcaption>
         </figure>
 
+        <div class="mt-10 rounded-xl p-6 sm:p-8" style="background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.18);">
+          <p class="mb-5 font-body text-[0.625rem] font-medium uppercase tracking-[0.18em]" style="color:var(--accent);opacity:0.8;">The math behind the result</p>
+          <div class="flex flex-col gap-0">
+            <div class="flex items-center justify-between py-3" style="border-bottom:1px solid rgba(255,255,255,0.06);">
+              <span class="font-body text-[0.9375rem] text-[var(--text-muted)]">Website applications (qualified leads)</span>
+              <span class="font-body text-[0.9375rem] font-semibold text-[var(--text)]">66</span>
+            </div>
+            <div class="flex items-center justify-between py-3" style="border-bottom:1px solid rgba(255,255,255,0.06);">
+              <span class="font-body text-[0.9375rem] text-[var(--text-muted)]">Industry avg. close rate</span>
+              <span class="font-body text-[0.9375rem] font-semibold text-[var(--text)]">20%</span>
+            </div>
+            <div class="flex items-center justify-between py-3" style="border-bottom:1px solid rgba(255,255,255,0.06);">
+              <span class="font-body text-[0.9375rem] text-[var(--text-muted)]">Closed jobs (conservative estimate)</span>
+              <span class="font-body text-[0.9375rem] font-semibold text-[var(--text)]">~13 jobs</span>
+            </div>
+            <div class="flex items-center justify-between py-3" style="border-bottom:1px solid rgba(255,255,255,0.06);">
+              <span class="font-body text-[0.9375rem] text-[var(--text-muted)]">Average job ticket (epoxy flooring)</span>
+              <span class="font-body text-[0.9375rem] font-semibold text-[var(--text)]">$3,000–$8,000</span>
+            </div>
+            <div class="flex items-center justify-between pt-4">
+              <span class="font-body text-base font-semibold text-[var(--text)]">Estimated revenue generated</span>
+              <span class="font-display text-[1.375rem] sm:text-[1.625rem]" style="color:var(--accent);">$39K–$104K</span>
+            </div>
+          </div>
+          <p class="mt-5 font-body text-[0.8125rem] leading-[1.6] text-[var(--text-muted)] opacity-70">Off $1,120 in ad spend. Your management fee pays for itself on the first job.</p>
+        </div>
+
       </div>
 
     </div>
@@ -1388,51 +1451,11 @@
 
         <details class="faq-item">
           <summary>
-            Do I need to sign a long-term contract?
+            I tried Facebook Ads before and it didn't work. Why would this be different?
             <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
           </summary>
           <p class="faq-answer text-[0.9375rem] sm:text-base">
-            No. Month-to-month. If it's not working, you shouldn't stay. But most clients don't leave because it works.
-          </p>
-        </details>
-
-        <details class="faq-item">
-          <summary>
-            How much do I need to spend on ads?
-            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-          </summary>
-          <p class="faq-answer text-[0.9375rem] sm:text-base">
-            Your ad budget is separate from our management fee and goes directly to Meta and/or Google through your own accounts — we never touch your ad spend. The right budget depends on your market, vertical, and goals. We cover exact numbers on the strategy call.
-          </p>
-        </details>
-
-        <details class="faq-item">
-          <summary>
-            What makes this different from every other agency?
-            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-          </summary>
-          <p class="faq-answer text-[0.9375rem] sm:text-base">
-            Most agencies hand you a lead and call it a day. We handle the follow-up, the qualification, and the booking — the three places service businesses bleed money. By the time a name lands on your calendar, they've already been through a full qualification process. You're not chasing anyone.
-          </p>
-        </details>
-
-        <details class="faq-item">
-          <summary>
-            What if I don't get results?
-            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-          </summary>
-          <p class="faq-answer text-[0.9375rem] sm:text-base">
-            We don't hide behind a 90-day "ramp period." If the system isn't performing, we'll tell you before you ask — and we'll fix it or part ways. Taking money for a system that isn't working isn't how this runs.
-          </p>
-        </details>
-
-        <details class="faq-item">
-          <summary>
-            Who is this NOT for?
-            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-          </summary>
-          <p class="faq-answer text-[0.9375rem] sm:text-base">
-            Contractors who can't close. This system books qualified appointments — it doesn't win jobs for you. If your problem is converting estimates you already have, fix that first and come back. Also not for anyone under $30K monthly revenue — the economics don't work at that level, and I'd rather tell you now than take your money.
+            Because running ads is the easy part. Most agencies stop there — they hand you a list of names and disappear. What kills the result is everything after the click: no qualifying system, no instant follow-up, no booking automation. Leads go cold in under 5 minutes if nobody contacts them. We built the system that catches them before they go cold. That's what's different.
           </p>
         </details>
 
@@ -1442,7 +1465,57 @@
             <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
           </summary>
           <p class="faq-answer text-[0.9375rem] sm:text-base">
-            Most clients see their first booked appointments within 7–14 days of launch. Ad accounts need a few days to exit Meta's learning phase. We set realistic timelines on the strategy call — no promises we can't keep.
+            Most clients see their first booked appointments within 7–14 days of launch. Meta ad accounts need a short learning phase — typically 3–5 days — before performance stabilizes. We don't promise overnight results, but we don't hide behind a 90-day "ramp period" either. If nothing's booking after two weeks, we're already fixing it.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            How much do I need to spend on ads?
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+          </summary>
+          <p class="faq-answer text-[0.9375rem] sm:text-base">
+            Your ad budget is completely separate from our management fee and goes directly to Meta or Google through your own ad accounts — we never touch your money. The minimum that moves the needle in most service markets is $1,000–$1,500/mo in ad spend. We'll give you a specific number for your market on the strategy call.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            Do I need to sign a long-term contract?
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+          </summary>
+          <p class="faq-answer text-[0.9375rem] sm:text-base">
+            No. Month-to-month. If it's not working, you shouldn't stay — and I'll be the first one to tell you. We don't lock people in because we don't need to. The system either produces results or it doesn't, and results are what keeps clients around.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            What happens to my website and CRM if I cancel?
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+          </summary>
+          <p class="faq-answer text-[0.9375rem] sm:text-base">
+            Your website code is yours. Your GHL account, contacts, and automations are yours. We don't hold anything hostage. If you cancel, you keep everything we built — you'd just be managing it yourself going forward. We'll document how everything works before we part ways.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            How much time does this take on my end?
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+          </summary>
+          <p class="faq-answer text-[0.9375rem] sm:text-base">
+            Your job is to show up to the appointments and close the jobs. Setup takes about a week of back-and-forth — we need info from you, photos, your service area, pricing. After that, the system runs. Most clients check their dashboard once a day and that's it. You didn't hire us to create more work for yourself.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            What if I can't handle more volume right now?
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+          </summary>
+          <p class="faq-answer text-[0.9375rem] sm:text-base">
+            Good problem to have — and one we can solve. The system is adjustable. We can dial ad spend down, tighten the qualifying criteria, or pause new lead flow entirely while you catch up. A full calendar you can't service is just as bad as an empty one, and we'd rather pace it right than burn your reputation.
           </p>
         </details>
 
@@ -1541,6 +1614,12 @@
           <p class="mt-4 text-center font-body text-[0.75rem] text-[var(--text-muted)] opacity-40">
             No commitment. If we're not a fit, I'll tell you.
           </p>
+          <div class="mt-5 flex flex-wrap justify-center gap-2">
+            <span class="trust-badge">Powered by GoHighLevel</span>
+            <span class="trust-badge">Meta Ads</span>
+            <span class="trust-badge">Google Ads</span>
+            <span class="trust-badge">No lock-in after 3 months</span>
+          </div>
         </div>
 
       </div>
@@ -1959,6 +2038,21 @@
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
       });
+    })();
+  </script>
+
+  <script>
+    // Sticky bar — show after hero leaves viewport
+    (function() {
+      var bar  = document.getElementById('sticky-bar');
+      var hero = document.getElementById('hero');
+      if (!bar || !hero) return;
+      var obs = new IntersectionObserver(function(entries) {
+        var visible = !entries[0].isIntersecting;
+        bar.classList.toggle('visible', visible);
+        bar.setAttribute('aria-hidden', String(!visible));
+      }, { threshold: 0.1 });
+      obs.observe(hero);
     })();
   </script>
 </body>
